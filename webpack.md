@@ -105,3 +105,102 @@ https://travis-ci.org/
 6. 动态polyfill
     - polyfill Service 识别User Agent，动态下发不同的plyfill
     - polyfill.is/v3/polyfill.min.js
+
+
+### 源码分析
+
+#### 入口文件：
+
+    1. process.exitCode   正常执行返回
+    2. runCommand   运行命令
+    3. isInstalled  判断是否存在包（require.resolve）
+    4. CLIs         webpack可用包，webpack-cli，webpack-command
+    5. isInstalledCLIs  判断是否安装命令行包
+    6. webpack会去寻找webpack-cli执行其命令
+    7. webpack-cli使用yargs配置命令行参数
+    8. webpack-cli最终使用webepack构建
+
+#### tapable：
+
+> 类似于nodejs的eventEmitter的库（发布订阅），控制webpack的插件系统
+
+```javascript
+
+const {
+    SyncHook,
+    SyncBailHook,
+    SyncWaterfallHook,
+    SyncLoopHook,
+    AsyncParallelHook,
+    AsyncParallelBailHook,
+    AsyncSeriesHook,
+    AsyncSeriesBailHook,
+    AsyncSeriesWaterfallHook,
+    MultiHook,
+    HookMap,
+    Tapable
+} = require('tapable')
+
+```
+
+> tapable中的钩子名称对应含义
+
+type | function
+:-- | :--
+Hook | 所有钩子的后缀
+Waterfall | 同步方法，会传值给下一个函数
+Bail | 熔断：当函数有返回值的时候，就会在当前执行函数停止
+Loop | 监听函数返回truee表示继续循环，返回undefined表示结束循环
+Sync | 同步方法
+AsyncSeries | 异步串行钩子
+AsyncParallel | 异步并行执行钩子
+
+> tapable 提供了同步&异步的绑定钩子的方法
+
+Async* | Sync*
+:-- | :--
+绑定：tapAsync/tapPromise/tap | 绑定：tap
+执行：callAsync/promise | 执行：call
+
+#### tapable 使用
+
+``` javascript
+
+const {
+    SyncHook
+    AsyncSeriesHook
+} = require('tapable')
+
+// 创建同步的hook
+const hook = new SyncHook(['arg1', 'arg2', 'arg3']);
+// 创建异步钩子
+const asyncHook = new AsyncSeriesHook(['test1', 'test2', 'test3']);
+
+asyncHook.tapPromiise('asyncHook1', (test1, test2, test3, callback) => {
+    cosnole.log('asyncHoook done');
+    return new Promise(resolve, reject => {
+        setTimeout(() => {
+            console.log(`this hook params is ${test1} , ${test2} , ${test3}`)
+            resolve();
+        }, 1000)
+    })
+})
+
+// 绑定hook内容
+hook.tap('hook1', (arg1, arg2, arg3) => {
+    console.log(arg1, arg2, arg3);
+})
+
+// 执行hook
+hook.call(1, 2, 3);
+
+// 执行asyncHook
+asyncHook.promise(1, 2, 3).then(() => {
+    console.log('promise resolve');
+}).catch(e => {
+    cosnole.log('promise error');
+    console.error(e);
+})
+
+```
+
