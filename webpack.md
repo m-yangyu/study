@@ -28,8 +28,76 @@ https://travis-ci.org/
 ### 性能优化
 
 1. 使用happypack进行多进行/多实例打包
+
+```javascript
+
+    module: {
+        rules: [
+            {
+                test: /.(ts|tsx)$/,
+                loader: 'HappyPack/loader?id=babelLoader',
+                exclude: /node_modules/
+            }
+        ]
+    }
+
+    plugins: [
+        new HappyPack({
+            id: 'babelLoader',
+            cache: true,
+            loaders: ['babel-loader']
+        })
+    ]
+
+```
+
 2. 使用dll预编译模式对公共包进行打包
+
+``` javascript
+
+    // webpack.dll.conf.js
+    module.exports = {
+        entry: {
+            react: ['react', 'react-dom'],
+            redux: ['redux', 'react-redux', 'redux-saga'],
+            reactRouter: ['react-router', 'react-router-dom']
+        },
+        output: {
+            path: path.resolve(__dirname, "./dll"),
+            filename: "myDll.[name].js",
+            library: "[name]_[fullhash]"
+        },
+        plugins: [
+            new webpack.DllPlugin({
+                path: path.resolve(__dirname, "./dll", "[name]-manifest.json"),
+                name: "[name]_[fullhash]"
+            })
+        ]
+    }
+
+    // webepack.pro.conf.js
+    new webpack.DllReferencePlugin({
+        manifest: require('./dll/react-manifest.json'),
+        name: './myDll-react.js',
+    })
+```
+
 3. tree Shaking 擦除无用的css代码
+
+``` javascript
+
+    const glob = require('glob');
+
+    const PATHS = {
+        src: path.join(__dirname, 'src')
+    }
+
+    new PurgecssPlugin({
+        paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+    }),
+
+```
+
 4. 使用cache进行构建缓存
 5. 对图片进行压缩
     - Node库 imagemin / yinypng API
