@@ -10,10 +10,17 @@ module.exports = {
                 title: '学习内容',
                 collapsable: false,
                 children: [
-                    ['/webpack', 'webpack'],
                     ['/cli', 'cli'],
                     ['/react', 'react'],
                     ['/vue', 'vue']
+                ]
+            },
+            {
+                title: 'webpack',
+                collapsable: false,
+                children: [
+                    ['/webpack', 'webpack'],
+                    ['/simple-webpack', 'simple-webpack']
                 ]
             }
         ],
