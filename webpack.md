@@ -204,3 +204,21 @@ asyncHook.promise(1, 2, 3).then(() => {
 
 ```
 
+#### webpack 插件
+
+webpack插件方式是tapable跟webpack关联的一种行为方式，使用事件监听的方法，对webpack返回出来的compiler的hooks进行监听并完成
+对应的功能
+
+> 流程
+
+plugins是一个array格式的结构，对于外部传入的plugins会进行判断，是否是一个function，如果是，并执行plugin的apply方法
+
+言外之意，就是如果我们需要去编写一个plugin的话，则必须开放出一个apply方法给webpack去调用
+
+```javascript
+
+if(options.plugins && Array.isArray(options.plugins)) {
+    compiler.apply.apply(compiler, options.plugins);
+}
+
+```
