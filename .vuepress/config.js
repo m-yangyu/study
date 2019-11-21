@@ -20,7 +20,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/webpack', 'webpack'],
-                    ['/simple-webpack', 'simple-webpack']
+                    ['/simple-webpack', 'simple-webpack'],
+                    ['/webpack-loader', 'loader']
                 ]
             }
         ],
