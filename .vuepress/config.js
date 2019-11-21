@@ -3,7 +3,7 @@ module.exports = {
         nav: [
             { text: 'vue', link: '/vue' },
             { text: 'react', link: '/react' },
-            { text: 'webpack', link: '/webpack' }
+            { text: 'webpack', link: '/webpack/webpack' }
         ],
         sidebar: [
             {
@@ -19,9 +19,10 @@ module.exports = {
                 title: 'webpack',
                 collapsable: false,
                 children: [
-                    ['/webpack', 'webpack'],
-                    ['/simple-webpack', 'simple-webpack'],
-                    ['/webpack-loader', 'loader']
+                    ['/webpack/webpack', 'webpack'],
+                    ['/webpack/simple-webpack', 'simple-webpack'],
+                    ['/webpack/webpack-loader', 'loader'],
+                    ['/webpack/webpack-plugin', 'plugin']
                 ]
             }
         ],
