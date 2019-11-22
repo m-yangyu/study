@@ -24,6 +24,13 @@ module.exports = {
                     ['/webpack/webpack-loader', 'loader'],
                     ['/webpack/webpack-plugin', 'plugin']
                 ]
+            },
+            {
+                title: 'svelte',
+                collapsable: false,
+                children: [
+                    ['/svelte', 'svelte']
+                ]
             }
         ],
         displayAllHeaders: true
