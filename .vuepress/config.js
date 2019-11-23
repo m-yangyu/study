@@ -31,6 +31,13 @@ module.exports = {
                 children: [
                     ['/svelte', 'svelte']
                 ]
+            },
+            {
+                title: 'node',
+                collapsable: false,
+                children: [
+                    ['/node/node_mock', '使用node mock数据']
+                ]
             }
         ],
         displayAllHeaders: true
