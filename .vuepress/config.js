@@ -36,7 +36,7 @@ module.exports = {
                 title: 'typescript',
                 collapsable: false,
                 children: [
-                    ['/typescript/index', '简介']
+                    ['/typescript/ts', '简介']
                 ]
             },
             {
