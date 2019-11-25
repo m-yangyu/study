@@ -26,17 +26,24 @@ module.exports = {
                 ]
             },
             {
-                title: 'svelte',
-                collapsable: false,
-                children: [
-                    ['/svelte', 'svelte']
-                ]
-            },
-            {
                 title: 'node',
                 collapsable: false,
                 children: [
                     ['/node/node_mock', '使用node mock数据']
+                ]
+            },
+            {
+                title: 'typescript',
+                collapsable: false,
+                children: [
+                    ['/typescript/index', '简介']
+                ]
+            },
+            {
+                title: 'svelte',
+                collapsable: false,
+                children: [
+                    ['/svelte', 'svelte']
                 ]
             }
         ],
