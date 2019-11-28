@@ -45,6 +45,13 @@ module.exports = {
                 children: [
                     ['/svelte', 'svelte']
                 ]
+            },
+            {
+                title: 'rollup',
+                collapsable: false,
+                children: [
+                    ['/rollup/rollup', 'rollup']
+                ]
             }
         ],
         displayAllHeaders: true

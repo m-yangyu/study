@@ -45,5 +45,3 @@ argvStore 是一个对命令行参数获取并且做解析的分析的一个库
 argvStore 是一个单例库，不管在任何地方new argvStore 返回的只会是一个唯一实例
 
 根据commander的实现方式与逻辑仿写了一份自己需要的argvStore，实现了在内部传入回调进行使用的方法
-
-f
