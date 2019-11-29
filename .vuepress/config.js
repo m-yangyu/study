@@ -7,6 +7,13 @@ module.exports = {
         ],
         sidebar: [
             {
+                title: 'js基础',
+                collapsable: false,
+                children: [
+                    ['/basic/basic', '基础（一）']
+                ]
+            },
+            {
                 title: '学习内容',
                 collapsable: false,
                 children: [
