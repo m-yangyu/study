@@ -52,6 +52,13 @@ module.exports = {
                 children: [
                     ['/rollup/rollup', 'rollup']
                 ]
+            },
+            {
+                title: '资源优化',
+                collapsable: false,
+                children: [
+                    ['/optimization/static', '静态资源']
+                ]
             }
         ],
         displayAllHeaders: true
