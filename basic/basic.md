@@ -73,7 +73,14 @@ js中的原始类型就只有这6个，在原始类型上面他是不存在任�
 
 1. JSON
 
-这种方法能够将对象的原地址改变，但是由于JSON无法复制出对象中的undefined和function以及原型链上的方法，所以只能用于一般的数据组装以及
+这种方法能够将对象的原地址改变，但是由于使用JSON也有一定的问题
+
+- 忽略`undefined`
+- 无视`function`
+- 不管`symbol`
+- 不能复制原型链上的数据
+
+所以一般情况都是只用于对于简单的json数据的深拷贝
 
 ``` javascript
 
@@ -82,5 +89,67 @@ js中的原始类型就只有这6个，在原始类型上面他是不存在任�
     b.b = 2;
     console.log(a.b); // 1
     console.log(b.b); // 2
+
+```
+
+2. MessageChannel
+
+messageChannel的具体介绍[请戳这里](./messageChannel.html);
+
+``` javascript
+
+function structuralClone(obj) {
+  return new Promise(resolve => {
+    const { port1, port2 } = new MessageChannel()
+    port2.onmessage = ev => resolve(ev.data)
+    port1.postMessage(obj)
+  })
+}
+
+var obj = {
+  a: 1,
+  b: {
+    c: 2
+  }
+}
+
+obj.b.d = obj.b
+
+// 注意该方法是异步的
+// 可以处理 undefined 和循环引用对象
+const test = async () => {
+  const clone = await structuralClone(obj)
+  console.log(clone)
+}
+test()
+
+```
+
+3. 自己实现深拷贝
+
+通过递归以及原型链上的方法获取将一个对象的所有属性赋值给另一个对象, 但是在实际开发过程中我更推荐使用[lodash](https://lodash.com/docs#cloneDeep),
+
+``` javascript
+// 不考虑任何边界情况的简单深拷贝
+function deepClone(obj) {
+    if (typeof obj !== 'object') {
+        return obj;
+    }
+
+    const isArray = Array.isArray(obj);
+    const clone = isArray ? [] : {};
+
+    if (isArray) {
+        obj.map(item => {
+            clone.push(typeof item !== 'object' ? item : deepClone(item));
+        })
+    } else {
+        // 返回所有属性（不包含继承属性）
+        Reflect.ownKeys(obj).map(key => {
+            clone[key] = typeof obj[key] !== 'object' ? obj[key] : deepClone(obj[key])
+        })
+    }
+    return clone;
+}
 
 ```

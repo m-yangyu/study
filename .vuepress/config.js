@@ -10,7 +10,8 @@ module.exports = {
                 title: 'js基础',
                 collapsable: false,
                 children: [
-                    ['/basic/basic', '基础（一）']
+                    ['/basic/basic', '基础（一）'],
+                    ['/basic/messageChannel', 'messageChannel']
                 ]
             },
             {

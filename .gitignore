@@ -4,3 +4,4 @@ node_modules
 .vuepress/.DS_Store
 package-lock.json
 code
+.DS_Store
