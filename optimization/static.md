@@ -55,6 +55,22 @@ node接收图片路径，通过参数解析获取到对应的调用方法，使�
 2. data uri
 3. 雪碧图
 
+### 精简html
+
+1. 减少html的嵌套
+2. 减少dom的节点数
+3. 减少无语义代码`<div class="clear"></div>`
+4. 删除协议头，http或https
+5. 压缩html
+6. 省略沉余标签
+7. 使用相对路径
+
+### css性能处理
+
+1. 谨慎使用expensive属性`:nth-child; position:fixed`
+2. 尽量减少样式层级
+3. 尽量避免使用占用过多CPU和内存的属性`text-indnt: -99999px`
+
 ## 页面渲染架构设计及方案选型
 
 ## 原生app优化
