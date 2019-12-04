@@ -11,7 +11,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/basic/basic', '基础（一）'],
-                    ['/basic/reflect', 'reflect']
+                    ['/basic/reflect', 'reflect'],
+                    ['/basic/prototype', 'prototype']
                 ]
             },
             {

@@ -84,7 +84,7 @@ Reflect.defineProperty(target, propertyKey, attributes)
 
 Reflect.deleteProperty(target, propertyKey)
 
-跟delete表达式很像，但是这个是一个函数而不是一个表达水
+跟delete表达式很像，但是这个是一个函数而不是一个表达式
 
 > example
 
@@ -103,5 +103,39 @@ Reflect.deleteProperty({}, "foo"); // true
 
 // 如果属性不可配置，返回 false
 Reflect.deleteProperty(Object.freeze({foo: 1}), "foo"); // false
+
+```
+
+### getOwnPropertyDescriptor
+
+Reflect.getOwnPropertyDescriptor(target, propertyKey)
+
+跟object.getOwnPropertyDescriptor类似，只是是通过函数调用，不存在返回undefined
+
+``` javascript
+
+Reflect.getOwnPropertyDescriptor({x: "hello"}, "x");
+// {value: "hello", writable: true, enumerable: true, configurable: true}
+
+Reflect.getOwnPropertyDescriptor({x: "hello"}, "y");
+// undefined
+
+Reflect.getOwnPropertyDescriptor([], "length");
+// {value: 0, writable: true, enumerable: false, configurable: false}
+
+
+```
+
+### getPrototypeOf
+
+Reflect.getPrototypeOf(target)
+
+静态方法 Reflect.getPrototypeOf() 与 Object.getPrototypeOf() 方法是一样的。都是返回指定对象的原型（即，内部的 [[Prototype]] 属性的值）
+
+``` javascript
+
+Reflect.getPrototypeOf({}); // Object.prototype
+Reflect.getPrototypeOf(Object.prototype); // null
+Reflect.getPrototypeOf(Object.create(null)); // null
 
 ```

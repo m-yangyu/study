@@ -158,3 +158,6 @@ function deepClone(obj) {
 
 Reflect 是一个内置的对象，它提供拦截 JavaScript 操作的方法。这些方法与处理器对象的方法相同。Reflect不是一个函数对象，因此它是不可构造的
 [具体内容](./reflect.html)
+
+### 原型链
+
