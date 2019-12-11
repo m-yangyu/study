@@ -73,6 +73,120 @@ console.log(interface.subTest);     // 555
 
 ```
 
+> 经典继承
+
+经典继承使用起来非常方便，直接调用父类的构造函数，并传入this改变原父类的指向，将父类上的属性写入到子类中
+
+缺点：
+    1. 无法继承父类的prototype
+    2. 方法都在构造函数中定义，无法复用
+    3. 无法通过instanceof来判断是否是继承了父类
+
+``` javascript
+
+function father() {
+    this.a = '123';
+}
+
+function child() {
+    father.call(this);
+}
+
+const a = new child();
+
+console.log(a.a) // '123'
+
+```
+
+> 组合继承
+
+组合继承是将原型链继承与经典继承组合在一起来使用，既能够继承了父类的属性也能继承了父类的prototype的内容
+
+缺点：
+    1. 写法略过复杂
+    2. 父类的构造函数被调用两次
+
+``` javascript
+
+function father() {
+    this.test = '111';
+}
+
+father.prototype.getTest = function() {
+    console.log(this.test);
+}
+
+function child() {
+    father.call(this);
+}
+
+child.prototype = new father();
+
+const a = new child();
+
+console.log(a.test);    // '111'
+console.log(a.getTest())// '111'
+
+```
+
+> 寄生式继承
+
+通过构造函数返回出一个对象实例，能够实现内部封装
+
+缺点：
+    1. 无法继承原型链
+    2. 内部方法都挂载咋实例上，无法被继续继承
+
+``` javascript
+
+function father(o) {
+    const child = Object.create(o);
+    child.getTest = function() {
+        console.log(this.test);
+    }
+
+    return child;
+}
+
+const a = father({test: '123'});
+
+a.getTest()     // '123'
+
+```
+
+> 寄生组合式继承
+
+实际上是基于组合式继承的方法进行了更深层次的优化，因为组合式继承无论如何都会调用两次父类的构造函数，寄生组合式继承完美的解决了这个问题
+
+``` javascript
+
+function extend(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    subClass._proto_ = superClass;
+}
+
+function father() {
+    this.a = '123';
+}
+
+function child() {
+    father.call(this);
+    this.get = () => {
+        console.log(this.a);
+    }
+}
+
+extend(child, father);
+
+const a = new child();
+
+console.log(a.a) // '123'
+console.log(a.get) // '123'
+
+
+```
+
 代码可能看的会有点饶，看图可能会更加清晰一些
 
 ![prototype流程图](../public/image/3.png)
