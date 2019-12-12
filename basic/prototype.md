@@ -42,6 +42,10 @@ console.log(test._proto_);
 
 ```
 
+代码可能看的会有点饶，看图可能会更加清晰一些
+
+![prototype流程图](../public/image/3.png)
+
 ### 继承
 
 原型链的继承其实相对而言很简单，只需要将要继承的原型的prototype指向继承的实例即可
@@ -187,12 +191,27 @@ console.log(a.get) // '123'
 
 ```
 
-代码可能看的会有点饶，看图可能会更加清晰一些
+### new
 
-![prototype流程图](../public/image/3.png)
+看完寄生组合继承的实例以后，不得不解释一下，这里在extend中没有使用new但是却照样能够继承原型链，那么new具体做了什么事情
+
+``` javascript
+
+var obj = {};
+obj.__proto__ = F.prototype;
+F.call(obj);
+
+```
+
+实际上，new做的事情非常的简单，甚至说很浅显易见
+
+1. 建立一个新的object对象
+2. 将obj的__proto__指向了传入的方法的prototype
+3. 调用了方法，修改了this指向获得一个新的object
 
 ### 总结
 
 1. Object是所有的对象的终结点，就是所有的对象的爸爸，根据原型链查询最后都会走到Object的方法上
 2. 实例化后的对象是不能获取prototype属性的只能通过__proto__
 3. 每个__proto__属性指向的是原型的prototype
+4. 继承其实就是对原型链进行操作，能够让当前的类通过原型链不断往上找到对应的值
