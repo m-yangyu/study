@@ -240,3 +240,76 @@ Object.is毕竟走的是函数调用，那么势必会比===的js表达式来的
 块级作用域有点像是在任意地方生成一个可以拥有自己作用域的方法，例如for，try catch，with等等
 
 js引擎会通过两种方式来对各个作用域进行查找，`LHS`,`RHS`,简单的讲就是查找的是等式两边的值（左右），但是再查找的时候，还是有不同的区别，RHS在查找的时候，如果找不到当前的变量，那么就会返回一个语法错误，而LHS如果找不到的话，就会在全局作用域下面创建一个新的变量，当然在这个是在不开启严格模式的情况下，开启了严格模式依旧会报错，当然LHS找到之后如果对null或者undefined进行函数调用或者方法查找，依旧会报一个类型错误的提示
+
+### 什么是闭包
+
+闭包，是js中的一个作用域的体现，或者说一种特殊的作用域，能够让函数在调用的时候调用到不属于当前作用域下的变量
+
+``` javascript
+
+function b() {
+    const a = '123'
+    function c() {
+        console.log(a);
+    }
+    return c;
+}
+
+const test = b();
+
+test.c();   // '123'
+
+```
+
+这个例子就是所谓的闭包，闭包其实很简单，但是却不能小看他，在项目中闭包能够很有强大的作用
+
+- 实现私有变量
+- 实现模块化
+
+js中是没有类的实现方式的，所以自然也就不存在用类定义的私有变量和私有方法，但是能够通过各种不同的行为来模仿类，私有变量与私有方法就是通过闭包来实现的
+
+``` javascript
+
+function parent() {
+    const private_data = '爸爸';
+
+    this.ask = () => {
+        console.log(private_data);
+    }
+}
+
+const people = new parent();
+
+people.ask() // 爸爸
+people.private_data // undefined
+
+```
+
+这样就通过闭包实现了一个类的私有变量，借用了new方法来实现了一个类的初始化
+
+而对于实现模块化，本质上也是借用了闭包的特质
+
+``` javascript
+
+const MyModule = function () {
+    const modules = {};
+
+    const define = (name, args, func) => {
+        if (name) {
+            modules[name] = func.apply(func, args);
+        }
+    }
+
+    return {
+        define,
+        modules
+    }
+}();
+
+MyModule.define('test', [], function() {
+    console.log(123);
+})
+
+```
+
+上面简单的实现了一个模块化整理的内容，将所有的模块方法，整合到一个变量当中，那个变量存在于一个自执行的匿名函数中，由于modules并不会被删除，因为还是存在使用，所以各个模块能够通过不同的加载实现模块化开发

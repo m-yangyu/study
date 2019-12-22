@@ -19,7 +19,8 @@ module.exports = {
                 children: [
                     ['/basic/basic', '基础（一）'],
                     ['/basic/reflect', 'reflect'],
-                    ['/basic/prototype', 'prototype']
+                    ['/basic/prototype', 'prototype'],
+                    ['/basic/Iterator', 'Iterator']
                 ]
             },
             {
