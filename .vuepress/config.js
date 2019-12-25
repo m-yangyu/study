@@ -19,8 +19,9 @@ module.exports = {
                 children: [
                     ['/basic/basic', '基础（一）'],
                     ['/basic/reflect', 'reflect'],
-                    ['/basic/prototype', 'prototype'],
-                    ['/basic/Iterator', 'Iterator']
+                    ['/basic/prototype', '原型链'],
+                    ['/basic/Iterator', '迭代器'],
+                    ['/basic/designPattern', '设计模式']
                 ]
             },
             {
