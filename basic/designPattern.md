@@ -348,3 +348,6 @@ function getValid() {
 getValid();
 
 ```
+
+
+### 代理模式
