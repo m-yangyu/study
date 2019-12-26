@@ -209,3 +209,142 @@ console.log(a.name === b.name); // true
 ```
 
 使用闭包的形式保存住唯一的生成内容，每次new function的时候会判断当前是否已经存在，如果已经存在就返回当前的内容不存在就新new一个对象
+
+### 策略模式
+
+策略模式讲究将具体计算与判断逻辑进行分离，以便于减少if-else的死亡判断，话不多说直接看代码
+
+``` javascript
+
+// 一般性的代码
+
+function getPhoneFactory(name) {
+    if (name === 'apply') {
+        console.log('apply factory');
+    } else if (name === 'huawei') {
+        console.log('huawei factory');
+    } else if (name === 'vivo') {
+        console.log('vivo factory');
+    }
+}
+
+// 使用策略模式后的代码
+const phoneFactory = {
+    apply() {
+        console.log('apply factory');
+    },
+    huawei() {
+        console.log('huawei factory');
+    },
+    vivoo() {
+        console.log('vivo factory');
+    }
+}
+
+function phone() {
+    this.func = () => {};
+    this.add = function(func) {
+        this.func = func;
+    }
+    this.start = function() {
+        this.func();
+    }
+}
+
+const a = new phone();
+a.add(phoneFactoty.apply);
+a.start();
+
+```
+
+这样子就能够将一个面向过程的代码改为面向对象，但是同时也增加了很多额外的负担
+
+- 需要更多的内存去存储对应的变量以及方法
+- 不同的代码之间，可能会生成更多的策略类以及方法类
+
+> 实际用例
+
+当对form进行校验的时候如果使用策略模式，会让代码变得更加简洁易懂
+
+``` javascript
+
+// 校验规则
+const rules = {
+    maxLength(value, length, errmsg) {
+        if (value.length > length) {
+            return errmsg
+        }
+    },
+    minLength(value, length, errmsg) {
+        if (value.length < length) {
+            return errmsg
+        }
+    },
+    isPhone(value, errmsg) {
+        if (!/(^1[3|5|8][0-9]{9}$)/.test(value)) {
+            return errmsg
+        }
+    }
+}
+// 校验类
+class FormValid{
+    constructor() {
+        // 缓存的校验规则
+        this.rules = [];
+        // 校验数据
+        this.data = {};
+    }
+    setRule(key, name, errmsg) {
+        if (!key || !name || !errmsg) {
+            console.error('方法参数不正常');
+            return ;
+        }
+        // 通过对校验方法进行封装，添加数据
+        this.rules.push(function(value) {
+            const nameArr = name.split(':');
+            const paramsArr = [];
+            paramsArr.push(this.data[key]);
+            !!nameArr[1] && paramsArr.push(nameArr[1]);
+            paramsArr.push(errmsg);
+            return rules[nameArr[0]].apply(this, paramsArr);
+        });
+    }
+    setData(data) {
+        this.data = data;
+    }
+    valid() {
+        if (Object.keys(this.data).length === 0) {
+            console.error('当前校验器中没有数据');
+            return ;
+        }
+        // 校验
+        let errmsg = [];
+        this.rules.map(func => {
+            const currentErrmsg = func.call(this);
+            !!currentErrmsg && errmsg.push(currentErrmsg);
+        });
+
+        return {
+            isValid: errmsg.length === 0,
+            errmsg
+        }
+
+    }
+}
+
+function getValid() {
+    const validator = new FormValid();
+    validator.setRule('a', 'maxLength:6', 'a最大长度为6');
+    validator.setRule('b', 'minLength:2', 'b最小长度为2');
+    validator.setRule('c', 'isPhone', 'c不是手机类型');
+    validator.setData({
+        a: '123123123',
+        b: '1',
+        c: '11702834617'
+    })
+    console.log(validator.valid());
+}
+
+getValid();
+
+```
