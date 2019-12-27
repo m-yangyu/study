@@ -349,5 +349,104 @@ getValid();
 
 ```
 
-
 ### 代理模式
+
+代理模式是一种通过第三方对象去调用目标对象的实现方法，为每个类提供单一的职能，安全管理，数据筛选，缓存处理等等
+
+``` javascript
+
+function add() {
+    const arr = Array.from(arguments);
+    let num = 0;
+    arr.map(item => num += item);
+    console.log(num);
+    return num;
+}
+
+class proxyCache {
+    constructor(func) {
+        this.func = func;
+        this.cache = {};
+    }
+
+    done() {
+        const arr = Array.from(arguments);
+        const name = arr.toString();
+        if (this.cache[name]) {
+            return this.cache[name]
+        }
+        this.cache[name] = this.func.apply(this, arr);
+        return this.cache[name];
+    }
+
+}
+
+const addCache = new proxyCache(add);
+
+addCache.done(1,2,3,4,5);
+addCache.done(1,2,3,4,5);    // 第二次运算直接从缓存中取出
+
+```
+
+上次的`proxyCache类`通过代理了add方法，使add方法方法添加了缓存的效果, 需要换一种方法的话，只需要重新new一个`proxyCache类`出来，所以实际上proxyCache是一个工厂模式生成的类，只提供缓存能力
+
+### 命令模式
+
+命令模式指的是通过指令的方式将操作与界面结合，例如，点击一个按钮，只是发送了一个指令，但是却不知道这个指令具体做了什么事情，也不是这个按钮要关心的内容，将UI或者说方法与方法之间变成松耦合
+
+``` javascript
+
+
+function test() {
+    console.log('test execute');
+}
+
+const command = {
+    execute() {
+        test();
+    }
+}
+
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', command.execute);
+
+```
+
+以上就是实现了最简单的一种UI跟实现分离，就是UI你自己做完UI调用一下`command.execute`，而实现方法的人不需要知道在UI层是否是调用了这个方法，具体的调用就存在于`command.execute`中，这就是实现了多人合作的一个人画界面一个人写方法，不需要沟通相互实现对方的内容即可，但是也会有问题，明明是一个函数能够解决这么简单的事情，却非要加一个`command类`出来，多麻烦，是的，相对这种简单的案例来说，确实没有直接调用来的简洁明了，但是一旦中间添加了些操作那么就是这么简单了，比如如果一个按钮操作完内容，需要撤回，或者需要撤回到好几步之前的操作，使用命令模式就能很好的解决问题
+
+``` javascript
+
+const btn = document.getElementById('btn');
+const restart = document.getElementById('restart');
+const revoke = document.getElementById('revoke');
+const input = document.getElementById('input');
+
+function test(value) {
+    console.log(`${value} execute`);
+}
+
+class Command{
+    constructor() {
+        this.cache = [];
+    }
+    execute(value) {
+        test(value);
+        this.cache.push(test.bind(this, value));
+    }
+    reStart() {
+        this.cache.map(func => func());
+    }
+    revoke() {
+        this.cache.pop();
+        this.reStart();
+    }
+}
+
+const command = new Command();
+
+btn.addEventListener('click', () => command.execute(input.value));
+restart.addEventListener('click', () => command.reStart());
+revoke.addEventListener('click', () => command.revoke());
+
+```
