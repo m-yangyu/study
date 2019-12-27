@@ -422,8 +422,10 @@ const restart = document.getElementById('restart');
 const revoke = document.getElementById('revoke');
 const input = document.getElementById('input');
 
-function test(value) {
-    console.log(`${value} execute`);
+const testCommand = {
+    execute(value) {
+        console.log(`${value} execute`);
+    }
 }
 
 class Command{
@@ -431,8 +433,8 @@ class Command{
         this.cache = [];
     }
     execute(value) {
-        test(value);
-        this.cache.push(test.bind(this, value));
+        testCommand.execute(value);
+        this.cache.push(testCommand.execute.bind(this, value));
     }
     reStart() {
         this.cache.map(func => func());
@@ -450,3 +452,172 @@ restart.addEventListener('click', () => command.reStart());
 revoke.addEventListener('click', () => command.revoke());
 
 ```
+
+### 组合模式
+
+组合模式是一种针对普通命令你模式的整合形态，他可以支持一次性直接多个命令，同时在组合模式中他还可以支持自己的组合里面也存在组合，即就是基本的树形结构，父叶子下面的可以是子叶子也可以还是父叶子
+
+``` javascript
+
+function getIndent(length) {
+    let str = '';
+    for(let i = 0; i < length; i++) {
+        str += '  ';
+    }
+    return str;
+}
+
+class parentNode {
+    constructor(name) {
+        this.name = name;
+        this.parent = null;
+        this.child = [];
+    }
+    add(node) {
+        node.setParent(this);
+        this.child.push(node);
+        return this;
+    }
+    setParent(parent) {
+        this.parent = parent;
+    }
+    scan(length = 0) {
+        console.log(`${getIndent(length)}正在扫描父节点：${this.name}`);
+        this.child.map(node => 
+            !!node.child ? 
+            node.scan(length + 2) : 
+            console.log(`${getIndent(length + 2)}正在输出子节点:${node.name}`)
+        );
+        console.log(`${getIndent(length)}当前父节点扫描结束`);
+    }
+}
+
+class childNode {
+    constructor(name) {
+        this.name = name;
+        this.parent = null;
+    }
+    add() {
+        throw new Error('子节点不能够添加节点');
+    }
+    setParent(parent) {
+        this.parent = parent;
+    }
+    scan() {
+        console.log(`正在打印当前节点：${this.name}`);
+    }
+}
+
+const parent = new parentNode('parent1');
+const parent1 = new parentNode('parent2');
+const child = new childNode('child');
+const child1 = new childNode('child1');
+const child2 = new childNode('child2');
+
+parent.add(parent1).add(child).add(child1);
+parent1.add(child2);
+
+parent.scan();
+
+```
+
+![结果](../public/image/7.png)
+
+这样就实现了一种简单的组合模式的运用，实际上就是组合生成一个树形的数据结构，但是能够拥有更好的扩展空间，并且能够保证子节点跟父节点的方法相同，让调用的时候不用在意或者区分父节点跟子节点的差别，但是仔细看一下，发现他实际上对于父节点和子节点的区分并不是很明显，他们有很多共同点在里面，那么应该还有一个种其他办法能够精简一下这里的代码
+
+### 模板方法模式
+
+模板方法模式就是提供这么一个方法，执行相同的步骤内容
+
+继续看上面的代码，我们会发现，父节点跟子节点都拥有同样的方法，但是子节点里面有很多方法是不可使用的，接下来，我们来改造一下
+
+``` javascript
+
+function getIndent(length) {
+    let str = '';
+    for(let i = 0; i < length; i++) {
+        str += '  ';
+    }
+    return str;
+}
+
+class Node {
+    constructor(name) {
+        this.name = name;
+        this.parent = null;
+        this.child = [];
+    }
+    add() {
+        throw new Error('需要在子类中实现');
+    }
+    setParent() {
+        throw new Error('需要在子类中实现');
+    }
+    preGetCurrentNodeInfo() {
+        console.log('preGetCurrentNodeInfo钩子')
+    }
+    scan() {
+        console.log(`${getIndent(length)}正在扫描父节点：${this.name}`);
+        this.child.map(node => 
+            !!node.child.length ? 
+            node.scan(length + 2) : 
+            console.log(`${getIndent(length + 2)}正在输出子节点:${node.name}`)
+        );
+        console.log(`${getIndent(length)}当前父节点扫描结束`);
+    }
+    getCurrentNodeInfo() {
+        console.log(`
+            当前节点名称： ${this.name}
+            当前节点是否有子节点： ${!!this.child.length}
+            当前节点的子节点数量： ${this.child.length}
+            当前节点的父节点名称： ${!!this.parent && this.parent.name}
+        `)
+    }
+    start() {
+        this.scan();
+        console.log('------------------');
+        this.preGetCurrentNodeInfo();
+        this.getCurrentNodeInfo();
+    }
+}
+
+class parentNode extends Node {
+    constructor(name) {
+        super(name);
+    }
+    add(node) {
+        node.setParent(this);
+        this.child.push(node);
+        return this;
+    }
+    setParent(parent) {
+        this.parent = parent;
+    }
+}
+
+class childNode extends Node {
+    constructor(name) {
+        super(name);
+    }
+    setParent(parent) {
+        this.parent = parent;
+    }
+}
+
+const parent = new parentNode('parent1');
+const parent1 = new parentNode('parent2');
+const child = new childNode('child');
+const child1 = new childNode('child1');
+const child2 = new childNode('child2');
+
+parent.add(parent1).add(child).add(child1);
+parent1.add(child2);
+
+parent.start();
+child.start();
+
+```
+
+我们重新定义了一个类，他拥有子节点跟父节点相同的方法内容，并且拥有一个固定的方法执行方式，打印了当前所有的节点以及当前节点的所有信息
+
+这个时候，我们可能会在打印当前节点信息之前会处理一些其他事情呢，所以会提供一个钩子函数，他在虚拟类里面不实现，也不报错，但是子类中实现之后就会去调用，模板方法模式必须是要通过继承来实现的设计模式，因为他会将一个通用的流程步骤封装在父类里面，子类实现对应的方法来完成子类的构造
