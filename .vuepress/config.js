@@ -77,6 +77,13 @@ module.exports = {
                 children: [
                     ['/optimization/static', '静态资源']
                 ]
+            },
+            {
+                title: '中台',
+                collapsable: false,
+                children: [
+                    ['/middlePlatform', '中台简介']
+                ]
             }
         ],
         displayAllHeaders: true
