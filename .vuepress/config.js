@@ -83,7 +83,7 @@ module.exports = {
                 title: '中台',
                 collapsable: false,
                 children: [
-                    ['/middlePlatform', '中台简介']
+                    ['/middlePlatform/desc', '中台简介']
                 ]
             }
         ],
