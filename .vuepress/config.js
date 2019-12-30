@@ -75,7 +75,8 @@ module.exports = {
                 title: '资源优化',
                 collapsable: false,
                 children: [
-                    ['/optimization/static', '静态资源']
+                    ['/optimization/static', '静态资源'],
+                    ['/optimization/lazyload', '懒加载']
                 ]
             },
             {
