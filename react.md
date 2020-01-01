@@ -22,7 +22,9 @@
 
 #### state hook
 
-> 调用react的useState
+> 使用中遇到的问题
+
+1. 使用useState初始化为Object的时候，直接修改当前值再使用set是不起作用的，需要浅拷贝
 
 #### effect hook
 
