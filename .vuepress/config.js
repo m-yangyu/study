@@ -2,7 +2,7 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: 'vue', link: '/vue' },
-            { text: 'react', link: '/react' },
+            { text: 'react', link: '/react/react' },
             { text: 'webpack', link: '/webpack/webpack' }
         ],
         sidebar: [
@@ -29,8 +29,15 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/cli', 'cli'],
-                    ['/react', 'react'],
                     ['/vue', 'vue']
+                ]
+            },
+            {
+                title: 'react',
+                collapsable: false,
+                children: [
+                    ['/react/react', 'react简单内容'],
+                    ['/react/important', 'react概念解析']
                 ]
             },
             {
