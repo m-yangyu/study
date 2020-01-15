@@ -66,3 +66,62 @@
 3. 在入口文件中引用StoreProvider的高阶组件，传入store（createStore生成的）
 4. 在各自子组件当中使用useStore获取[state, dispatch]
 5. 使用dispatch修改字段内容
+
+### hooks实际应用
+
+> useHttp
+
+通过对`useEffect`的封装，只需要传入一定的参数就可以实现一个简单的http请求，可通过`setParams`修改参数重新获取请求
+
+
+``` javascript
+
+import React, { useState, useEffect } from 'react';
+import Http from 'util/Http';
+
+const useHttp = (func, params, defaultValue) => {
+
+    const [res, setRes] = useState(void 0);
+    const [param, setParam] = useState(params);
+
+    useEffect(() => {
+
+        if (typeof func === 'string') {
+            func = Http.post.bind(this, func, { ...param });
+        } else if (typeof func === 'function') {
+            func = func.bind(this, { ...param });
+        }
+
+        const getUrlData = async () => {
+            const curRes = await func();
+            if (curRes) {
+                setRes(curRes);
+            }
+        }
+        getUrlData();
+    }, [param])
+
+    return [res || defaultValue, setRes, setParam];
+}
+
+export default useHttp;
+
+```
+
+> useDiff
+
+这个方法是最简单的一个实现，通过判断传入的数据是否发生改变，然后会回调方法，假装是原来的`componentWillReceiveProps`生命周期
+
+``` javascript
+
+import React, { useEffect } from 'react';
+
+const useDiff = (props, func) => {
+    useEffect(() => {
+        func()
+    }, [props]);
+}
+
+export default useDiff;
+
+```
