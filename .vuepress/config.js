@@ -18,6 +18,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/basic/basic', '基础（一）'],
+                    ['/basic/http', 'http'],
                     ['/basic/reflect', 'reflect'],
                     ['/basic/prototype', '原型链'],
                     ['/basic/Iterator', '迭代器'],

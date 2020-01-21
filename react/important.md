@@ -167,11 +167,33 @@ react中检测组件多久渲染一次或者渲染一次需要的代价
       <Navigation {...props} />
     </Profiler>
     <Main {...props} />
-  </App>
+</App>
 
 ```
 
 ### setState
+
+setState是异步的，所以同时写好几个setState是不执行的，但是也是可以同步去执行setState
+
+``` javascript
+
+setState(() => ({
+    a: '123'
+}))
+
+setTimeout(() => {
+    setState({
+        a: '123'
+    });
+})
+
+```
+
+以上两种方法都能够让setState同步的执行，说到这个，那就要看下为什么会出现这种情况
+
+setState的运行机制，是存在一个事务的概念
+
+
 
 ### useState
 
