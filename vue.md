@@ -61,3 +61,45 @@ vue内容通过方法将ast书转为可执行的code，最后用 `new Function` 
 ### vue不能通过$set修改this上的数据吗
 
 可以修改， `this.$set(this._data, key, value)`
+
+### vue中的sync指令符
+
+可以使用sync来实现类似v-model的效果，可用于props传入并支持props的被修改，sync指令符会默认添加一个update的更新命令，从而实现子组件更新父组件的内容
+
+``` javascript
+
+<my-component
+    :name.sync="a"
+>
+</my-component>
+
+export default {
+    props: {
+        name: {
+            type: String
+        }
+    },
+    computed: {
+        syncedName: {
+            get() {
+                return this.name
+            },
+            set(value) {
+                this.$emit('update:name', value)
+            }
+        }
+    }
+}
+
+```
+
+在ts中的写法
+
+``` javascript
+import { Component, Vue, PropSync} from 'vue-property-decorator';
+@Component()
+class MyComponent extends Vue {
+    @PropSync('name', { type: String }) yourComputedName!: string
+}
+
+```

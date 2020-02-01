@@ -16,3 +16,6 @@ BFC是css中的一个格式化上下文的方法，简单的来说就是让一�
 3. position不为relative或static
 4. overflow为aoto，scroll或hidden
 5. display为table-cell，table-caption或inline-block
+
+### 移动端1px的问题
+
