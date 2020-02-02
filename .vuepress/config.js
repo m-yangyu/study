@@ -7,6 +7,15 @@ module.exports = {
         ],
         sidebar: [
             {
+                title: '面试题',
+                collapsable: false,
+                children: [
+                    ['/interview/css', 'css'],
+                    ['/interview/js', 'js'],
+                    ['/interview/react_vue', 'react_vue']
+                ]
+            },
+            {
                 title: 'css',
                 collapsable: false,
                 children: [
