@@ -332,3 +332,90 @@ call性能会好一些，因为call的使用除了第一个参数，其他参数
 2. 1x1的gif是图片中大小最小的
 3. 能够完成一次http请求
 4. 执行过程无阻塞
+
+### 要求设计 LazyMan 类，实现以下功能。
+
+```javascript
+
+LazyMan('Tony');
+// Hi I am Tony
+
+LazyMan('Tony').sleep(10).eat('lunch');
+// Hi I am Tony
+// 等待了10秒...
+// I am eating lunch
+
+LazyMan('Tony').eat('lunch').sleep(10).eat('dinner');
+// Hi I am Tony
+// I am eating lunch
+// 等待了10秒...
+// I am eating diner
+
+LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk food');
+// Hi I am Tony
+// 等待了5秒...
+// I am eating lunch
+// I am eating dinner
+// 等待了10秒...
+// I am eating junk food
+
+
+// 简单实现
+function LazyMan(name) {
+    console.log(name);
+    this.sleep = (time) => {
+        setTimeout(() => {
+            console.log(`等待了${time}秒`);
+        })
+        return this;
+    }
+
+    this.eat = (food) => {
+        setTimeout(() => {
+            console.log(`I am eating ${food}`);
+        })
+        return this;
+    }
+
+    this.sleepFirst = (time) => {
+        new Promise((resolve, reject) => {
+            resolve(time);
+        }).then(res => {
+            console.log(`等待了${res}秒`);
+        })
+        return this;
+    }
+    return this;
+}
+
+```
+
+### 箭头函数与普通函数（function）的区别是什么？构造函数（function）可以使用 new 生成实例，那么箭头函数可以吗？为什么？
+
+箭头函数是普通函数的简写方式，但是箭头函数有跟普通函数有几点区别
+
+1. 箭头函数没有申明提升
+2. 箭头函数的this是生命的时候的this
+3. 箭头函数无法使用new操作符（因为没有this对象，也没有prototype）
+4. 没有arguments参数，可使用...reset代替
+5. 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数
+
+### 给定两个数组，写一个方法来计算它们的交集
+
+> 给定 nums1 = [1, 2, 2, 1]，nums2 = [2, 2]，返回 [2, 2]
+
+1. 循环死判断
+2. fliter(也是循环判断)
+
+### a.b.c.d 和 a['b']['c']['d']，哪个性能更高？
+
+a.b.c.d性能更好一点，毕竟不需要查找当前是不是一个数组，直接就是对对象的操作
+
+### ES6 代码转成 ES5 代码的实现思路是什么
+
+通过babel将es6代码转换成ast，然后转换成es5的ast在变换源代码
+
+### 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
+
+使用的是websocket，通过node监听到文件的变化然后服务端发送请求到客户端，客户端重新编译刷新
+
