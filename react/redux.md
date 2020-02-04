@@ -51,3 +51,22 @@ function (store, middleWares) {
 ### redux-thunk
 
 redux-thunk是一个很简单的东西，它本质上就是将action进行判断，如果action是一个function的话，重新调用下action并传入参数
+
+```javascript
+// 源码
+function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) => (next) => (action) => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);
+    }
+
+    return next(action);
+  };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+
+```

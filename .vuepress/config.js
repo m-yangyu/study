@@ -47,7 +47,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/react/react', 'react简单内容'],
-                    ['/react/important', 'react概念解析']
+                    ['/react/important', 'react概念解析'],
+                    ['/react/redux', 'redux简单内容']
                 ]
             },
             {
