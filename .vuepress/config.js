@@ -3,7 +3,7 @@ module.exports = {
         nav: [
             { text: 'vue', link: '/vue' },
             { text: 'react', link: '/react/react' },
-            { text: 'webpack', link: '/webpack/webpack' }
+            { text: 'interview', link: '/interview/css' }
         ],
         sidebar: [
             {
@@ -39,7 +39,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['/cli', 'cli'],
-                    ['/vue', 'vue']
+                    ['/vue', 'vue'],
+                    ['/framework', '大型项目架构']
                 ]
             },
             {
