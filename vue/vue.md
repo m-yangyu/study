@@ -4,7 +4,7 @@
 
 [vue的源码阅读思维导图](https://www.processon.com/view/link/5e0dc665e4b0f8e58dc860bd)
 
-![vue思维导图](./public/image/8.png)
+![vue思维导图](../public/image/8.png)
 
 ### 为什么用proxy代替definePrototype
 
