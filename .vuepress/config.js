@@ -38,10 +38,9 @@ module.exports = {
                 title: '学习内容',
                 collapsable: false,
                 children: [
-                    ['/cli', 'cli'],
-                    ['/vue', 'vue'],
-                    ['/framework', '大型项目架构']
-                    
+                    ['/other/cli', 'cli'],
+                    ['/other/framework', '大型项目架构'],
+                    ['/other/pwa', 'pwa']
                 ]
             },
             {
@@ -51,6 +50,13 @@ module.exports = {
                     ['/react/react', 'react简单内容'],
                     ['/react/important', 'react概念解析'],
                     ['/react/redux', 'redux简单内容']
+                ]
+            },
+            {
+                title: 'vue',
+                collapsable: false,
+                children: [
+                    ['/vue/vue', 'vue']
                 ]
             },
             {
