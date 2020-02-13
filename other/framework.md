@@ -70,3 +70,25 @@ jenkins 是现有发布系统中使用率比较高的一个产品，针对所有
 具体使用哪种方式，或者混合使用就是仁者见仁智者见智了，毕竟手动埋点更加精确，但是代码耦合度高，无埋点耦合度低，写起来方便，但是会将所有的行为都保存起来，可视化埋点对于平台的搭建要求比较高
 
 我个人比较推荐的一种做法是，在无埋点的事件委托上，将`event.target`上添加`data-id`字段，并且在元素身上声明这个是什么类型的，进行一个判断，这样能够减少一些http请求，并且将一些不需要收集的方法不收集
+
+> 无埋点实现方案
+
+``` javascript
+
+window.addEventListener('click', function(e) {
+    const target = e.target;
+    // 判断target上的内容类型
+    // 进行请求发送，1*1的gif图
+    // 进入埋点
+})
+
+window.addEventListener('error', function(message, url, line, column, error) {
+    // 进行错误检测
+})
+
+window.addEventLister('load', function() {
+    // performance进行性能监控
+})
+
+// 也可以使用service work进行http请求拦截监听
+```
