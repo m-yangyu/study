@@ -75,6 +75,8 @@ jenkins 是现有发布系统中使用率比较高的一个产品，针对所有
 
 ``` javascript
 
+<img src="..." onError="报错方法"/>
+
 window.addEventListener('click', function(e) {
     const target = e.target;
     // 判断target上的内容类型
