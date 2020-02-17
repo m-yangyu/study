@@ -12,9 +12,72 @@
 
 自建脚手架的必要性其实是根据各个公司的情况来自行考虑的，如果觉得`create-react-app`或者`vue-cli`带来的脚手架用处不是很够的话，可以考虑自己搭建，正常情况，没有特殊需求的公司或者产品是可以直接使用cli来快速搭建，没必要花费时间在这个上面，毕竟重头写一个出来也是要花点时间的，不如直接使用cli工具来的更快更方便，但是可能存在就是会有很多多余的内容残留
 
+封装出3个项目
+
+### webpack配置
+
+使用`node`来运行`webpack，webpack-dev-server`运行开发环境，这没什么好说的，用的都是封装好的api
+
+### react源代码路径
+
+正常的路径解析，但是将webpack的配置使用`npm`包管理之后的路径配置，有不同的配置路径，以及`eslint，test`文件需要放在这里
+
 ### eslint
 
 为了统一项目规范而使用的`eslint`，`webpack`配置中添加`eslint-loader`,可以保证每次文件更新的时候会触发eslint的校验，然后保证代码风格的统一，也可以添加`pre-commit`来触发`eslint`的校验
+
+配置eslint的时候需要注意几个问题：
+
+1. es6的代码可能还不能够解析，所以需要使用babel-eslint来解析es6的代码
+2. `webpack alisa`中有的代码，指定路径的时候，需要添加`eslint-import-resolver-webpack`插件，来指定`webpack alisa`的路径
+3. 可以配置路径解析，不需要写全路径
+4. react中使用了`Airbnb`的`eslint`配置，那么需要编写`typeProps`和`defaultProp`
+
+> eslint 配置
+
+```javascript
+
+module.exports = {
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "airbnb",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "node_modules/@mj/react-webpack/webpack/webpack.conf.js"
+            }
+        }
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        'import/extensions': ['error', 'always', {
+            'js': 'never',
+            'jsx': 'never'
+        }]
+    }
+};
+
+```
+
+### 脚手架下载cli工具
+
+用于下载脚手架，避免每次都重新写一份或者说，拷贝一份
 
 ### 自动发布
 
