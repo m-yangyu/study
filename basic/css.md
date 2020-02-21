@@ -19,3 +19,22 @@ BFC是css中的一个格式化上下文的方法，简单的来说就是让一�
 
 ### 移动端1px的问题
 
+1. 使用box-shadow
+
+box-shadow： 0 0 0 1px #000;
+
+@media (min-resolution: 2dppx) {
+    box-shadow: 0 0 0 .5px #b4a078;
+}
+@media (min-resolution: 3dppx) {
+    box-shadow: 0 0 0 .333333px #b4a078;
+}
+
+2. 使用transform
+
+transform: scale(.5) translateZ(0);
+
+### 背景色覆盖border
+
+background-clip: padding-box
+
