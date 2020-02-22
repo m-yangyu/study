@@ -165,7 +165,6 @@ export default {
     position: relative;
     width: 50px;
     height: 50px;
-    margin-top: 100px;
     animation: widthLong 8s infinite;
 }
 .box div{
