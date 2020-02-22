@@ -26,3 +26,29 @@ var reverse = function(x) {
 }
 
 ```
+
+## 判断回文数
+
+> 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+
+``` javascript
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if (x < 0) {
+        return false;
+    }
+    let str = x + '';
+
+    for (let i = 0, j = str.length - 1; i < j; i++, j--) {
+        if (str[i] !== str[j]) {
+            return false
+        }
+    }
+    return true
+};
+
+```

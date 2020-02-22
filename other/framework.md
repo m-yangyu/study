@@ -181,9 +181,23 @@ window.addEventListener('error', function(message, url, line, column, error) {
     // 进行错误检测
 })
 
-window.addEventLister('load', function() {
-    // performance进行性能监控
-})
-
 // 也可以使用service work进行http请求拦截监听
+```
+
+### 性能监控
+
+![思维导图](../public/image/9.png)
+
+使用`performance`方法获取对应的参数内容进行上报
+
+``` javascript
+
+console.log(performance.getEntrys());
+
+// 大概率出现以下几种类型的文件，也可以直接用getEntriesByType
+// resource
+// navigation
+// paint
+// event
+
 ```
