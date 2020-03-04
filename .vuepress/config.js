@@ -41,6 +41,7 @@ module.exports = {
                 children: [
                     ['/other/cli', 'cli'],
                     ['/other/framework', '大型项目架构'],
+                    ['/other/20200301', '记一次企业级脚手架搭建的经历'],
                     ['/other/pwa', 'pwa'],
                     ['/other/leetcode', '算法题']
                 ]
