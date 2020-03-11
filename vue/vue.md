@@ -32,7 +32,7 @@
 
 ### slot的scope是怎么实现的
 
-存在v-slot的组件会在父组件以及子组件中间在重新添加一个标签，将scope的数据通过新的标签传给子组件
+vue内部在进行parse的时候会将带有scope的slot封装成一个function， 而function的参数就是传入的scope的值
 
 ### computed怎么实现的
 
