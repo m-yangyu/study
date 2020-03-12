@@ -45,14 +45,6 @@ class Example extends React.Component {
 
 ```
 
-### 聊聊redux与vuex的设计思想
-
-redux与vuex的核心思想其实是比较类似的，都是全局状态管理，设置全局的state，来保证组件间的通信，不同的地方在于
-
-redux需要通过action进行更新，直接修改state的值是不会触发修改，这个符合react的设计思想，并且在redux中最重要的概念就是middleWare，因为有了中间件所以能够对数据更新以及数据收集有更好的处理与收集
-
-vuex是可以直接修改对应的state的内容，但是更推荐使用action进行更新，可以进行状态修改跟踪
-
 ### 聊聊 Vue 的双向数据绑定，Model 如何改变 View，View 又是如何改变 Model 的
 
 `v-model` 是一个语法糖，他的内部实现实际上也只是一个监听和回调，当 view 上数据修改的时候，会触发 change 事件，直接将写入的数据跟 vue 中存储的数据进行修正，而直接修改 vue 中的数据的时候，会触发 vue 的更新策略（diff算法），然后去更新新的dom内容
@@ -96,3 +88,25 @@ Vue 遵循单向数据流的概念，数据只能从上到下，而不能从下�
 1. react在构建大型项目的时候，写法上，以及架构上更不容易出现问题（vue模板容易出现不容易发现的问题，毕竟react全部都是js）
 2. 如果需要同时构建app，web，小程序等等，使用react他的生态更好一些
 3. react的生态更加繁华
+
+### 为什么react需要hooks
+
+### 什么是react的fibler，有什么优缺点
+
+### react中的setState是如果进行更新的
+
+### 什么是virtual Dom
+
+### 聊聊redux与vuex的设计思想
+
+redux与vuex的核心思想其实是比较类似的，都是全局状态管理，设置全局的state，来保证组件间的通信，不同的地方在于
+
+redux需要通过action进行更新，直接修改state的值是不会触发修改，这个符合react的设计思想，并且在redux中最重要的概念就是middleWare，因为有了中间件所以能够对数据更新以及数据收集有更好的处理与收集
+
+vuex是可以直接修改对应的state的内容，但是更推荐使用action进行更新，可以进行状态修改跟踪
+
+### 从数据驱动去理解redux
+
+### redux的中间件具体做了什么
+
+### vue跟react的diff算法上有什么差异
