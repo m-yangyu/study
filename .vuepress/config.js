@@ -32,7 +32,8 @@ module.exports = {
                     ['/basic/prototype', '原型链'],
                     ['/basic/Iterator', '迭代器'],
                     ['/basic/designPattern', '设计模式'],
-                    ['/basic/Array', '数组']
+                    ['/basic/Array', '数组'],
+                    ['/basic/closure', '闭包']
                 ]
             },
             {
