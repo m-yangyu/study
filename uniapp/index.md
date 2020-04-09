@@ -43,9 +43,20 @@ vue add eslint
 
 ### 配置eslint的插件
 
+根据喜好配置对应的eslint内容，我这边现在用的airbnb的配置
+
+### 配置precommit插件
+
+> npm i pre-commit - D
+
+添加eslint检测，在上传之前检测eslint是否存在错误
+
+`eslint --ext .vue,.ts,.tsx --quiet src`
+
 ## ts + vue 的问题
 
 1. computed的类型问题
+
 ``` javascript
 
 // computed 默认写法
@@ -60,3 +71,9 @@ computed: {
 //  Property 'a' does not exist on type '() => object'
 
 ```
+
+## 基于问题选择使用
+
+针对上述的一系列问题，可以选择使用class模式的vue开发流程
+
+添加jsx，即可将vue与react的变的及其相似，可以说开发模式都类似了
