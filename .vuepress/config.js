@@ -64,6 +64,13 @@ module.exports = {
                 ]
             },
             {
+                title: 'uniapp',
+                collapsable: false,
+                children: [
+                    ['uniapp/', '项目搭建']
+                ]
+            },
+            {
                 title: 'webpack',
                 collapsable: false,
                 children: [
