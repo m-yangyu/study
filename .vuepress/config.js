@@ -84,7 +84,9 @@ module.exports = {
                 title: 'node',
                 collapsable: false,
                 children: [
-                    ['/node/node_mock', '使用node mock数据']
+                    ['/node/node_mock', '使用node mock数据'],
+                    ['/node/mysql', 'mysql'],
+                    ['/node/loginSign', '单点登录']
                 ]
             },
             {
