@@ -1,0 +1,7 @@
+.history/
+node_modules
+.vuepress/dist
+.vuepress/.DS_Store
+package-lock.json
+code
+.DS_Store

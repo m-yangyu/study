@@ -1,0 +1,141 @@
+## Reflect
+
+与大多数全局对象不同，Reflect不是一个构造函数。你不能将其与一个new运算符一起使用，或者将Reflect对象作为一个函数来调用。Reflect的所有属性和方法都是静态的（就像Math对象）
+
+### apply
+
+Reflect.apply(target, thisArgument, argumentsList)
+
+> 参数
+
+- target
+
+    目标函数
+
+- thisArgument
+
+    target函数调用时绑定的this对象
+
+- argumentList
+
+    target函数调用时传入的实参列表，该参数应该是一个类数组的对象
+
+> 返回值
+
+调用完带着指定参数和 this 值的给定的函数后返回的结果
+
+> example
+
+``` javascript
+
+Reflect.apply(Math.floor, undefined, [1.75]); 
+// 1;
+
+Reflect.apply(String.fromCharCode, undefined, [104, 101, 108, 108, 111]);
+// "hello"
+
+Reflect.apply(RegExp.prototype.exec, /ab/, ["confabulation"]).index;
+// 4
+
+Reflect.apply("".charAt, "ponies", [3]);
+// "i"
+
+```
+
+### construct
+
+Reflect.construct(target, argumentsList[, newTarget])
+
+> 参数
+
+- target
+
+    被运行的目标构造函数
+
+- argumentList
+
+    类数组，目标构造函数调用时的参数
+
+- newTarget
+
+    新创建对象的原型对象， 参考 new.target 操作符，默认值为target。
+
+> 返回值
+
+以target（如果newTarget存在，则为newTarget）函数为构造函数，argumentList为其初始化参数的对象实例
+
+> example
+
+```javascript
+
+var d = Reflect.construct(Date, [1776, 6, 4]);
+d instanceof Date; // true
+d.getFullYear(); // 1776
+
+```
+
+### defineProperty
+
+Reflect.defineProperty(target, propertyKey, attributes)
+
+基本等同于Object.defnieProperty, 唯一不同的是返回了boolean值
+
+### delectProperty
+
+Reflect.deleteProperty(target, propertyKey)
+
+跟delete表达式很像，但是这个是一个函数而不是一个表达式
+
+> example
+
+``` javascript
+
+var obj = { x: 1, y: 2 };
+Reflect.deleteProperty(obj, "x"); // true
+obj; // { y: 2 }
+
+var arr = [1, 2, 3, 4, 5];
+Reflect.deleteProperty(arr, "3"); // true
+arr; // [1, 2, 3, , 5]
+
+// 如果属性不存在，返回 true
+Reflect.deleteProperty({}, "foo"); // true
+
+// 如果属性不可配置，返回 false
+Reflect.deleteProperty(Object.freeze({foo: 1}), "foo"); // false
+
+```
+
+### getOwnPropertyDescriptor
+
+Reflect.getOwnPropertyDescriptor(target, propertyKey)
+
+跟object.getOwnPropertyDescriptor类似，只是是通过函数调用，不存在返回undefined
+
+``` javascript
+
+Reflect.getOwnPropertyDescriptor({x: "hello"}, "x");
+// {value: "hello", writable: true, enumerable: true, configurable: true}
+
+Reflect.getOwnPropertyDescriptor({x: "hello"}, "y");
+// undefined
+
+Reflect.getOwnPropertyDescriptor([], "length");
+// {value: 0, writable: true, enumerable: false, configurable: false}
+
+
+```
+
+### getPrototypeOf
+
+Reflect.getPrototypeOf(target)
+
+静态方法 Reflect.getPrototypeOf() 与 Object.getPrototypeOf() 方法是一样的。都是返回指定对象的原型（即，内部的 [[Prototype]] 属性的值）
+
+``` javascript
+
+Reflect.getPrototypeOf({}); // Object.prototype
+Reflect.getPrototypeOf(Object.prototype); // null
+Reflect.getPrototypeOf(Object.create(null)); // null
+
+```
