@@ -67,7 +67,7 @@ module.exports = {
                 title: 'uniapp',
                 collapsable: false,
                 children: [
-                    ['/studyuniapp/', '项目搭建']
+                    ['/study/uniapp/', '项目搭建']
                 ]
             },
             {
