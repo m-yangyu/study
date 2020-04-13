@@ -39,3 +39,11 @@ OAuth出现的背景在于第三方登录，即在有第三方想要嵌入我们
 4. 直接重定向至url，返回一个临时code
 5. 第三方带上临时code，AppID，AppSecret跟我们权限服务器换取access_token， refresh_access_token
 6. 返回access_token, refresh_access_token给我们，我们存于本地，后续服务都带上这个access_token
+
+#### 临时code
+
+临时code的作用主要还是用于对换取access_token的接口的一种保护，一旦使用过用code就不能再次使用，并且在十分钟之内如果没有去调用的话，也会过期
+
+#### 换取access_token
+
+验证过code之后，会对id以及secret进行一个数据库查询，如果查询到对应数据那么就会针对secret的内容进行一个封装，生成一个access_token
