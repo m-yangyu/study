@@ -89,9 +89,15 @@ function myNew(fn) {
 
 ```
 
-### es6的class 与 es5的function有什么区别
+### es6的class 与 es5的function在实例化有什么区别
 
+> class 与 function的区别
 
+1. class 必须实例化才能使用
+2. class 中存在static方法，可以使用class名称调用
+3. class 的内部函数无法实例化（内部方法没有构造函数）
+4. function 存在变量提升，class没有
+5. class 实例中的方法挂载在哪个（待考究，方法应该是prototype上，在构造函数中定义在this的方法是在哪得看下）
 
 ## 闭包
 
