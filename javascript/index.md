@@ -125,9 +125,84 @@ function myNew(fn) {
 
 ## 模块化
 
+### commonjs
+
+node的require跟module.exports方法
+
+### amd
+
+前置依赖，将当前要加载的模块提前写在define函数的最前面，通过异步去加载对应的模块，
+
+define(module, function(module) {
+
+})
+
+require();
+
+### cmd
+
+没有前置依赖，所有的模块都是在define的function中定义，在通过require进行引入额外的依赖
+
+define(function(require, exports, module) {
+
+})
+
+### es module
+
+在es中新生成的export和import内容，比较老的浏览器还是无法兼容这种模块化写法，通过polyfill进行方法的写入
+
+### webpack生成3种模式的区别
+
+### webpack如何生成这3种模块化方案的
+
+### webpack的基础内容有什么
+
+### 如果做到加载文件只引入当前文件的局部内容（tree shaking）
+
+### webpack如何做到代码分割
+
+### webpack3与webpack4的区别是什么
+
+### webpack5新出的内容有什么更新
+
+### plugin与loader的区别是什么
+
+### plugin的生命周期是什么
+
+### 如何编写一个webpack plugin
+
+### webpack的核心内容是啥？tapable是什么？有什么作用
+
+### webpack跟babel的关系是什么
+
+### webpack跟rollup的区别在哪里
+
+### 为什么要使用webpack
+
+### 一个简易的webpack他需要实现什么内容
+
 ## 解析
 
+js 是在线解析的，即只有在运行的时候才开始解析js的内容，而不是预先编译完成
+
+### 词法分析
+
+v8会对js进行语法分析，分析当前的字符是属于何种类型的，这时候就会碰到两种情况
+
+1. 加；
+2. 不加；
+
+加与不加其实本质来讲没有什么差别，因为js引擎会默认给不加；的进行分段处理
+
+这边个人感觉建议还是加上；因为能够保证所有的段落是完整的，减少解析器自动添加；的一个过程
+
 ## 事件循环（event loop）
+
+### 宏任务和微任务
+
+### node里面的事件循环
+
+### setTimeout在浏览器中是如何执行的
 
 ### 异步
 
