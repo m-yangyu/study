@@ -1,26 +1,18 @@
 # webpack装逼指南
 
-## 基本配置
-
-## tapable
-
-## plugin与loader
-
-## demo实现方案
-
-## plugin生命周期
-
 ## 按需加载
 
 ## code-spliting
 
 ## tree-shaking
 
-### webpack生成3种模式的区别
+## webpack生成3种模式的区别
 
-### webpack如何生成这3种模块化方案的
+## webpack如何生成这3种模块化方案的
 
-### webpack的基础内容有什么
+## webpack如何打一个lib包
+
+## webpack的基础内容有什么
 
 entry: 入口，可以添加入口文件信息，单页或者多页，就是配置不同的入口文件
 output: 出口文件，根据入口生成不同的出口内容，以及输出方式，amd，cmd等等，chunkname也是在这边进行配置，使用contenthash能够有效的对文件的缓存进行控制
@@ -85,8 +77,10 @@ webpack是文件统一编译的工具，babel是将js进行降级或者说将新
 
 webpack提供一个入口，给babel去解析各种文件内容
 
-### webpack跟rollup的区别在哪里
+## webpack跟rollup的区别在哪里
 
-### 为什么要使用webpack
+## webpack打一个lib包跟rollup打包有什么区别
 
-### 一个简易的webpack他需要实现什么内容
+## 为什么要使用webpack
+
+## 一个简易的webpack他需要实现什么内容
