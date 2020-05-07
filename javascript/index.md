@@ -147,6 +147,10 @@ define(function(require, exports, module) {
 
 })
 
+### commonjs
+
+
+
 ### es module
 
 在es中新生成的export和import内容，比较老的浏览器还是无法兼容这种模块化写法，通过polyfill进行方法的写入
