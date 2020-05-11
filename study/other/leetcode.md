@@ -52,3 +52,33 @@ var isPalindrome = function(x) {
 };
 
 ```
+
+## 外观数列
+
+> 是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：
+
+``` javascript
+
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+
+```
+
+``` javascript
+
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function (n) {
+    let prev = '1'
+    for (let i = 1; i < n; i++) {
+        prev = prev.replace(/(\d)\1*/g, item => `${item.length}${item[0]}`)
+    }
+    return prev
+};
+
+```
