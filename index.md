@@ -1,3 +1,7 @@
+# 前端脑图
+
+![脑图](/study/public/image/all.jpg)
+
 # 自己的思考
 
 [来自做前端之后的思考](/study/other/20200302.html)
