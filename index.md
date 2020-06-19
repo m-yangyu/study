@@ -1,6 +1,6 @@
 # 前端脑图
 
-![脑图](/study/public/image/all.jpg)
+![脑图](./study/public/image/all.jpg)
 
 # 自己的思考
 
