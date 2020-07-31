@@ -28,3 +28,10 @@ currentRouter是一个vue中的ref，就是一个简单的变量进行维护， 
 
 ## vue3的使用
 
+### reactive
+
+### ref
+
+### readonly
+
+### 
