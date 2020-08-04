@@ -8,7 +8,7 @@ module.exports = {
         sidebar: [
             {
                 title: '面试题',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/interview/css', 'css'],
                     ['/study/interview/js', 'js'],
@@ -17,14 +17,14 @@ module.exports = {
             },
             {
                 title: 'css',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/basic/css', 'css']
                 ]
             },
             {
                 title: 'js基础',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/basic/basic', '基础（一）'],
                     ['/study/basic/http', 'http'],
@@ -38,7 +38,7 @@ module.exports = {
             },
             {
                 title: '学习内容',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/other/cli', 'cli'],
                     ['/study/other/framework', '大型项目架构'],
@@ -49,7 +49,7 @@ module.exports = {
             },
             {
                 title: 'react',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/react/react', 'react简单内容'],
                     ['/study/react/important', 'react概念解析'],
@@ -58,21 +58,22 @@ module.exports = {
             },
             {
                 title: 'vue',
-                collapsable: false,
+                collapsable: true,
                 children: [
-                    ['/study/vue/vue', 'vue']
+                    ['/study/vue/vue', 'vue'],
+                    ['/vue/vuex', 'vuex']
                 ]
             },
             {
                 title: 'uniapp',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/uniapp/', '项目搭建']
                 ]
             },
             {
                 title: 'webpack',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/webpack/webpack', 'webpack'],
                     ['/study/webpack/simple-webpack', 'simple-webpack'],
@@ -82,7 +83,7 @@ module.exports = {
             },
             {
                 title: 'node',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/node/node_mock', '使用node mock数据'],
                     ['/study/node/mysql', 'mysql'],
@@ -91,28 +92,28 @@ module.exports = {
             },
             {
                 title: 'typescript',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/typescript/ts', '简介']
                 ]
             },
             {
                 title: 'svelte',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/svelte', 'svelte']
                 ]
             },
             {
                 title: 'rollup',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/rollup/rollup', 'rollup']
                 ]
             },
             {
                 title: '资源优化',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/optimization/static', '静态资源'],
                     ['/study/optimization/lazyload', '懒加载']
@@ -120,12 +121,13 @@ module.exports = {
             },
             {
                 title: '中台',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/middlePlatform/desc', '中台简介']
                 ]
             }
         ],
+        sidebarDepth: 2,
         displayAllHeaders: true
     },
     title: '学习文档',
