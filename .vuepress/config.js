@@ -79,6 +79,7 @@ module.exports = {
                     ['/study/webpack/simple-webpack', 'simple-webpack'],
                     ['/study/webpack/webpack-loader', 'loader'],
                     ['/study/webpack/webpack-plugin', 'plugin']
+                    ['/webpack/index', 'webpack构建分析']
                 ]
             },
             {

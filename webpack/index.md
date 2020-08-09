@@ -28,6 +28,16 @@ webpack打包完成之后，运行各模块的方法，默认会打包进entry�
 
 并不会将当前js中的部分没有使用到的方法进行一个删除
 
+### 按需加载
+
+在我们项目中， 当项目越来越大的时候， 一次如果将文件全部加载，那会导致页面加载js，css时间过长，空白时间太长的情况
+
+所以，webpack提供了一个按需加载的能力，`import()`，这个import跟es模块加载的import还是存在区别的， 在webpack中，会默认将当前的`import()`方法打包成一个新的模块， 然后创建`chunkId`，通过`__webpack_require__.e`即`requireEnsure`的方法进行动态的模块加载
+
+直接调用`__webpack_require__`方法是获取已加载的模块方法， 而是用`requireEnsure`方法则是将js动态的引入进页面，通过`jsonp`的形式
+
 ## manifest
+
+在webpack使用chunk生成各个模块的之后，调用`__webpack_require__`方法的时候，使用的参数是
 
 ## module cache
