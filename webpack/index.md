@@ -1,10 +1,16 @@
 # webpack
 
+webpack是处理js文件模块化的工具， 将大型的javascript应用，分割成多个小模块进行按需加载，并将文件解析进行优化压缩，减少文件体积
+
+webpack4之后通过contenthash打包对应的文件，生成稳定不变的hash名，增加浏览器缓存的效率， webpack3的时候使用的chunkhash，如果vue文件内容的css改变则会导致js也跟着改变，缓存失效
+
 默认行为是打包结果以CMD的模块加载方案执行
 
 ## runtime是什么
 
-webpack打包完成之后，运行各模块的方法，默认会打包进entry文件中，可以使用`manifest插件`将`runtime`打出来，进行缓存
+webpack打包完成之后，运行各模块的方法，默认会打包进entry文件中
+
+可以使用`optimization`中的`runtimeChunk`打包出`runtime`文件，用于缓存
 
 ## runtime做了什么
 
@@ -40,4 +46,6 @@ webpack打包完成之后，运行各模块的方法，默认会打包进entry�
 
 在webpack使用chunk生成各个模块的之后，调用`__webpack_require__`方法的时候，使用的参数是当前的chunkId，会通过当前的映射关系找到对应的模块id
 
+而这么一大堆的集合就是manifest
+   
 ## module cache
