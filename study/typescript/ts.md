@@ -32,3 +32,7 @@ npm i ypescript
 ```
 
 执行 npm run tsc就能对ts进行编译了（浏览器是不支持ts语言的，所以需要通过ts编译成js才能在浏览器里面使用）
+
+### 可配合webpack使用ts内容
+
+将`ts-loader`放入`rule`中， 能够让webpack解析`typescript`文件，将之解析为js文件，最终实现js的打包
