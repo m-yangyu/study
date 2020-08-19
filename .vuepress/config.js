@@ -33,7 +33,8 @@ module.exports = {
                     ['/study/basic/Iterator', '迭代器'],
                     ['/study/basic/designPattern', '设计模式'],
                     ['/study/basic/Array', '数组'],
-                    ['/study/basic/closure', '闭包']
+                    ['/study/basic/closure', '闭包'],
+                    ['/javascript/sandbox', '沙箱']
                 ]
             },
             {
@@ -128,7 +129,7 @@ module.exports = {
                 ]
             }
         ],
-        sidebarDepth: 2,
+        sidebarDepth: 1,
         displayAllHeaders: true
     },
     title: '学习文档',
