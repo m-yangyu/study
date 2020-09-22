@@ -62,7 +62,8 @@ module.exports = {
                 collapsable: true,
                 children: [
                     ['/study/vue/vue', 'vue'],
-                    ['/vue/vuex', 'vuex']
+                    ['/vue/vuex', 'vuex'],
+                    ['/vue/vite', 'vite'],
                 ]
             },
             {
