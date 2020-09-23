@@ -1,9 +1,8 @@
 module.exports = {
     themeConfig: {
         nav: [
-            { text: 'vue', link: '/vue' },
-            { text: 'react', link: '/react/react' },
-            { text: 'interview', link: '/interview/css' }
+            { text: '学习内容', link: '/study/other/cli' },
+            { text: 'interview', link: '/study/interview/css' }
         ],
         sidebar: [
             {
