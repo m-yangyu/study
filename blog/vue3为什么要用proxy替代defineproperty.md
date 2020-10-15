@@ -40,22 +40,29 @@ proxy对于数据的代理，是能够响应新增的属性，当新增一个属
 
 ## vue2和vue3
 
-首先，可以看下，vue3新增的几个主要api`ref, reactive, effect`
+首先，可以看下，vue3新增的几个主要api`ref, reactive, effect，computed`
 
 ### ref和reactive
 
-ref在定义中是用来定义基础变量， reactive用来定义复杂变量
+先来看下他在vue3中是如何使用的
 
 ```javascript
-import { ref, reactive } from 'vue';
+const normal = ref(0);
+const state = reactive({
+    a: 1,
+    b: 2,
+})
+```
 
-export default {
-    setup() {
-        const normal = ref(0);
-        const state = reactive({
-            a: 1,
-            b: 2,
-        })
-    }
-}
+vue3中也有对vue2的兼容处理也是使用了`reactive`，即`instance.data = reactive(data)`，将整个data属性使用`reactive`进行代理
+
+我们知道，vue2中的data就是使用`Object.definePerproty`进行数据劫持的， 那么在`reactive`中，他是如何使用proxy进行数据代理的，来兼容老的书写方式与新的compositionApi
+
+由于在reactive里面也只是通过proxy对传入的数据校验和代理，所以我们还是直接上垒，毕竟心急吃得了热豆腐
+
+来看下proxy的get和set具体做了什么
+
+```javascript
+// 
+
 ```
