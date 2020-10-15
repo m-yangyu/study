@@ -38,5 +38,24 @@ const p = new Proxy({
 
 proxy对于数据的代理，是能够响应新增的属性，当新增一个属性的时候，可以响应到get中，对当前对象进行代理
 
-## vue2和vue3的区别
+## vue2和vue3
 
+首先，可以看下，vue3新增的几个主要api`ref, reactive, effect`
+
+### ref和reactive
+
+ref在定义中是用来定义基础变量， reactive用来定义复杂变量
+
+```javascript
+import { ref, reactive } from 'vue';
+
+export default {
+    setup() {
+        const normal = ref(0);
+        const state = reactive({
+            a: 1,
+            b: 2,
+        })
+    }
+}
+```
