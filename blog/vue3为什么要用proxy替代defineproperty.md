@@ -10,7 +10,7 @@
 
 在使用vue2的时候，我们经常会碰到一个问题，添加新的对象属性`obj.a = 1`会无法被vue2劫持，必须使用vue2提供的`$set`方法来进行更新
 
-这个的原因想必大家也都清楚，因为defineProperty使用的前提必须是已知属性
+这个的原因想必大家也都清楚，因为defineProperty只能对当前对象的其中一个属性进行劫持
 
 ```javascript
 const a = {
@@ -64,9 +64,48 @@ vue3中对vue2的兼容处理也是使用了`reactive`，即`instance.data = rea
 
 > ps: 由于在reactive里面也只是通过proxy对传入的数据校验和代理，最主要的还是`set`和`get`，所以我们还是直接上垒吧，毕竟心急吃得了热豆腐
 
-#### 订阅/发布
+#### get
 
-#### 数据采集
+可以分析一下，vue2也好，vue3也罢，针对于数据的获取所做的事情主要内容不会有什么区别
+
+1. 获取当前需要的key的数据
+2. 依赖采集
+
+但是，针对于vue3使用proxy的特性，在这边额外做了一部分的兼容
+
+1. 如果获取的数据是一个对象，则会对对象再使用`reactive`进行一次数据的代理
+2. 如果是shallow类型的数据代理， 则直接返回当前获取到的数据
+
+#### effect依赖采集
+
+vue除去正常的data的数据代理以外，还有对应的computed和watch，而在vue3中直接使用了effect和computed方法能够直接生成对应的内容
+
+他们的数据更新跟依赖处理都是依赖于当前的data数据上的get进行依赖的收集
+
+掐头去尾的来看最核心的代码
+
+```javascript
+
+// targetMap当前所有代理的数据的一个Map集合
+// depsMap当前代理的数据的每一个Key所对应的Map集合
+// dep当前代理的数据中的key的对应依赖
+// activeEffect当前由effect或者computed生成的数据
+
+let depsMap = targetMap.get(target)
+if (!depsMap) {
+    targetMap.set(target, (depsMap = new Map()))
+}
+let dep = depsMap.get(key)
+if (!dep) {
+    depsMap.set(key, (dep = new Set()))
+}
+if (!dep.has(activeEffect)) {
+    dep.add(activeEffect)
+    activeEffect.deps.push(dep)
+}
+```
+
+
 
 #### 响应更新
 
