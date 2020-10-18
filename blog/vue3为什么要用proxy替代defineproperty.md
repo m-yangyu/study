@@ -31,20 +31,20 @@ const p = new Proxy({
     a: 1,
     b: 2,
 }, {
-    get: function(obj, prop, value) {
-        console.log('get', obj, prop, value);
-        return Reflect.get(obj, prop, value);
+    get: function(obj, value) {
+        console.log('get', obj, value);
+        return Reflect.get(obj, value);
     },
-    set: function(obj, value) {
-        console.log('set', obj, value);
-        return Reflect.set(obj, value);
+    set: function(obj, prop, value) {
+        console.log('set', obj, prop, value);
+        return Reflect.set(obj, prop, value);
     },
 })
 ```
 
 proxy对于数据的代理，是能够响应新增的属性，当新增一个属性的时候，可以响应到get中，对当前对象进行代理
 
-## vue2和vue3的区别
+## vue3是如何通过proxy代理的
 
 首先可以看下vue3新增的几个主要api`ref, reactive, effect，computed`
 
@@ -149,3 +149,71 @@ setup() {
 
 #### 数组
 
+在vue2中的，针对数组是多做了一层处理，代理了数组的基本方法，这是因为使用`Object.defineProperty`在数组上面天然存在劣势
+
+具体原因在vue的文档中写的非常清楚了，这里就不详细叙述了
+
+[文档地址](https://cn.vuejs.org/v2/guide/reactivity.html#%E6%A3%80%E6%B5%8B%E5%8F%98%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+
+而在vue3中使用proxy就完美的解决了这个问题，只是因为proxy能够监听数组的变化，做个测试
+
+```javascript
+const a = new Proxy([1,2], {
+    get: function(obj, prop) {
+        console.log('get', obj, prop);
+        return Reflect.get(obj, prop);
+    },
+    set: function(obj, prop, value) {
+        console.log('set', obj, prop, value);
+        return Reflect.set(obj, prop, value);
+    },
+});
+a.push(1);
+
+get [1,2] push
+get [1,2] length
+set [1,2] 2 1
+set [1,2, 1] length 3
+```
+
+当我们代理了一个数组之后，直接调用push插入一个新的数据，能够明显的看到getter跟setter都会被调用两次，一次是调用的push方法，而另一次是数组的长度length，也就是说，proxy不仅仅会检测到我们当前调用的方法，还能够知道我们的数据长度是否发生了变化
+
+看到这边，可能会有一个疑惑，push是对当前数组进行的操作，但是数组里面还有部分方法是会返回一个新的数组，proxy是否会对新生成的数组也进行代理，这里我们拿splice举个例子
+
+```javascript
+// a= [1,2]
+a.splice(0, 1)
+
+get [1,2] push
+get [1,2] length
+get [1,2] constructor
+get [1,2] 0
+get [1,2] 1
+set [1,2] 0 2
+set [2,empty] length 1
+```
+
+从表现形式来看，proxy代理之后的数组只会对当前数组的内容进行监听，也就是调用`splice`之后新生成的数组的变化是不会被代理的
+
+现在我们回过头来看下vue3的trigger方法，这个是vue在set完成之后触发的依赖更新，同样的掐个头去个尾，除去正常的执行以外，我们看下针对数组做的优化
+
+``` javascript
+// add方法是将当前的依赖项添加进一个等待更新的数组中
+else if (key === 'length' && isArray(target)) {
+    depsMap.forEach((dep, key) => {
+      if (key === 'length' || key >= (newValue as number)) {
+        add(dep)
+      }
+    })
+} 
+```
+
+由于我们知道， 在一次操作数组的时候会进行多次的set，那么如果每次set都要去更新依赖的话，会造成性能上的浪费，所以在vue3里面只有在`set length`的时候才会去调用`add`方法，然后统一执行所有的更新
+
+## 结语
+
+不得不说，proxy比defineProperty强大了太多，不仅解决了vue的历史难题，让vue的体验更上了一层，更是去除了不少因为defineProperty而必须要的方法，精简了vue的包大小
+
+虽然proxy的兼容性是比defineProperty低不少，但是在vue里面基本已经抛弃了IE，所以如果你的项目需要在ie下运行的话，那就使用低版本的react的吧，哈哈哈哈哈哈，请放弃vue这个选择
+
+在移动端里面基本上就是没有这种版本的限制，实在是版本低不能使用proxy的话，相信去找找polyfill是能够找到的
