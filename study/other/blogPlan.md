@@ -2,7 +2,7 @@
 
 [x]为什么vue3要用proxy代替defineprototype
 []vue2.0与vue3.0的区别
-[]最新的vite究竟好在哪里
+[x]最新的vite究竟好在哪里
 []wbepack5更新了什么
 []webpack做了什么
 []横向对比webpack与rollup
