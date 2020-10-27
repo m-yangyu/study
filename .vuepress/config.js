@@ -6,6 +6,14 @@ module.exports = {
         ],
         sidebar: [
             {
+                title: '博客',
+                collapsable: true,
+                children: [
+                    ['/blog/20201026', 'vite好在哪里'],
+                    ['/blog/20201018', 'vue3为什么要用proxy替代defineproperty'],
+                ]
+            },
+            {
                 title: '面试题',
                 collapsable: true,
                 children: [
