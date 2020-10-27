@@ -7,7 +7,7 @@ module.exports = {
         sidebar: [
             {
                 title: '博客',
-                collapsable: true,
+                collapsable: false,
                 children: [
                     ['/blog/20201026', 'vite好在哪里'],
                     ['/blog/20201018', 'vue3为什么要用proxy替代defineproperty'],
@@ -137,7 +137,7 @@ module.exports = {
                 ]
             }
         ],
-        sidebarDepth: 1,
+        sidebarDepth: 0,
         displayAllHeaders: true
     },
     title: '学习文档',
