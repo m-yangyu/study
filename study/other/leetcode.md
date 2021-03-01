@@ -2,83 +2,27 @@
 
 努力保证一天一题
 
-## 整数反转
+## 数组
 
-> 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+- [381.O(1) 时间插入、删除和获取随机元素 - 允许重复](https://www.yuque.com/mhusky/czsg5g/puzzgt)
 
-``` javascript
-// 通过num求余数获得对应位上的数字
-var reverse = function(x) {
-    let num = '';
-    const minusSymbol = x < 0;
-    x = Math.abs(x);
-    while(x != 0) {
-        // 这种方式时间上最快
-        num = x%10;
-        x = Math.floor(x / 10);
-        // 下面这种方式内存占用率比较低
-        let ys = x%10;
-        num += ys;
-        x = Math.floor(x / 10);
-    }
-    const result = minusSymbol ? -num : +num;
-    return (result > -(2 << 30) || result < (2 << 30)) ? 0 : result;
-}
+## 动态规划
 
-```
+### 求最低点
 
-## 判断回文数
+- [121. 买卖股票的最佳时机](https://www.yuque.com/mhusky/czsg5g/oa2yt5)
+### 设置结果为f(x)找f(x-1)跟f(x-2)的关系
 
-> 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+- [面试题17.16. 按摩师](https://www.yuque.com/mhusky/czsg5g/zbptxr)
+- [746.  使用最小花费爬楼梯](https://www.yuque.com/mhusky/czsg5g/oa2yt5)
 
-``` javascript
+### 从0开始写结果得规律
 
-/**
- * @param {number} x
- * @return {boolean}
- */
-var isPalindrome = function(x) {
-    if (x < 0) {
-        return false;
-    }
-    let str = x + '';
+- [1025. 除数博弈](https://www.yuque.com/mhusky/czsg5g/cfi50g)
+### 斐波那契数列
 
-    for (let i = 0, j = str.length - 1; i < j; i++, j--) {
-        if (str[i] !== str[j]) {
-            return false
-        }
-    }
-    return true
-};
+- [70.爬楼梯](https://www.yuque.com/mhusky/czsg5g/pzu3w6)
 
-```
-
-## 外观数列
-
-> 是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。前五项如下：
-
-``` javascript
-
-1.     1
-2.     11
-3.     21
-4.     1211
-5.     111221
-
-```
-
-``` javascript
-
-/**
- * @param {number} n
- * @return {string}
- */
-var countAndSay = function (n) {
-    let prev = '1'
-    for (let i = 1; i < n; i++) {
-        prev = prev.replace(/(\d)\1*/g, item => `${item.length}${item[0]}`)
-    }
-    return prev
-};
-
-```
+### 滚动数组解法
+- [53.最大子序和](https://www.yuque.com/mhusky/czsg5g/rlk1vt)
+- [剑指 Offer 42. 连续子数组的最大和](https://www.yuque.com/mhusky/czsg5g/fv0wsd)
