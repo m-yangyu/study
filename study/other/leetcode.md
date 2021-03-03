@@ -12,13 +12,14 @@
 ### 设置结果为f(x)找f(x-1)跟f(x-2)的关系
 - [面试题17.16. 按摩师](https://www.yuque.com/mhusky/czsg5g/zbptxr)
 - [746.  使用最小花费爬楼梯](https://www.yuque.com/mhusky/czsg5g/oa2yt5)
+- [面试题 08.01. 三步问题](https://www.yuque.com/mhusky/czsg5g/wwz4y1)
+
+#### 斐波那契数列(特殊情况)
+- [70.爬楼梯](https://www.yuque.com/mhusky/czsg5g/pzu3w6)
+
 
 ### 从0开始写结果得规律
 - [1025. 除数博弈](https://www.yuque.com/mhusky/czsg5g/cfi50g)
-
-### 斐波那契数列
-- [70.爬楼梯](https://www.yuque.com/mhusky/czsg5g/pzu3w6)
-- [面试题 08.01. 三步问题](https://www.yuque.com/mhusky/czsg5g/wwz4y1)
 
 ### 滚动数组解法
 - [53.最大子序和](https://www.yuque.com/mhusky/czsg5g/rlk1vt)
