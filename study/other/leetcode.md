@@ -18,6 +18,7 @@
 
 ### 斐波那契数列
 - [70.爬楼梯](https://www.yuque.com/mhusky/czsg5g/pzu3w6)
+- [面试题 08.01. 三步问题](https://www.yuque.com/mhusky/czsg5g/wwz4y1)
 
 ### 滚动数组解法
 - [53.最大子序和](https://www.yuque.com/mhusky/czsg5g/rlk1vt)
