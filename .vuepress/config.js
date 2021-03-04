@@ -14,6 +14,13 @@ module.exports = {
                 ]
             },
             {
+                title: '算法',
+                collapsable: false,
+                children: [
+                    ['/study/other/leetcode', '每日一题'],
+                ]
+            },
+            {
                 title: '面试题',
                 collapsable: true,
                 children: [
@@ -52,7 +59,6 @@ module.exports = {
                     ['/study/other/framework', '大型项目架构'],
                     ['/study/other/20200301', '记一次企业级脚手架搭建的经历'],
                     ['/study/other/pwa', 'pwa'],
-                    ['/study/other/leetcode', '算法题']
                 ]
             },
             {
