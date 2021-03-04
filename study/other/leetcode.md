@@ -26,3 +26,6 @@
 ### 滚动数组解法
 - [53.最大子序和](https://www.yuque.com/mhusky/czsg5g/rlk1vt)
 - [剑指 Offer 42. 连续子数组的最大和](https://www.yuque.com/mhusky/czsg5g/fv0wsd)
+
+### 转换思维，暴力求解， 获取前后关系
+- [392. 判断子序列](https://www.yuque.com/mhusky/czsg5g/ofw8xx)
