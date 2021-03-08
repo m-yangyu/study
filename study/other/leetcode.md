@@ -2,6 +2,12 @@
 
 ## 数组
 
+### 暴力求解
+
+- [628. 三个数的最大乘积](https://www.yuque.com/mhusky/czsg5g/ydgg0d)
+
+### 修改数组结构，降低多次事件的时间复杂度
+
 - [381.O(1) 时间插入、删除和获取随机元素 - 允许重复](https://www.yuque.com/mhusky/czsg5g/puzzgt)
 
 ## 动态规划
