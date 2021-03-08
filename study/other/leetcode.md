@@ -19,6 +19,7 @@
 - [面试题17.16. 按摩师](https://www.yuque.com/mhusky/czsg5g/zbptxr)
 - [746.  使用最小花费爬楼梯](https://www.yuque.com/mhusky/czsg5g/oa2yt5)
 - [面试题 08.01. 三步问题](https://www.yuque.com/mhusky/czsg5g/wwz4y1)
+- [978. 最长湍流子数组](https://www.yuque.com/mhusky/czsg5g/logkew)
 
 #### 斐波那契数列(特殊情况)
 - [70.爬楼梯](https://www.yuque.com/mhusky/czsg5g/pzu3w6)
