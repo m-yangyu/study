@@ -10,6 +10,10 @@
 
 - [381.O(1) 时间插入、删除和获取随机元素 - 允许重复](https://www.yuque.com/mhusky/czsg5g/puzzgt)
 
+### 贪心算法
+
+- [605.种花问题](https://www.yuque.com/mhusky/czsg5g/oqmk9n)
+
 ## 动态规划
 
 ### 求最低点
