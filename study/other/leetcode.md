@@ -5,6 +5,9 @@
 ### 暴力求解
 
 - [628. 三个数的最大乘积](https://www.yuque.com/mhusky/czsg5g/ydgg0d)
+- [1426. 数元素](https://www.yuque.com/mhusky/czsg5g/za92ef)
+- [1672. 最富有客户的资产总量](https://www.yuque.com/mhusky/czsg5g/ds724k)
+- [832. 翻转图像](https://www.yuque.com/mhusky/czsg5g/fc6mml)
 
 ### 修改数组结构，降低多次事件的时间复杂度
 
