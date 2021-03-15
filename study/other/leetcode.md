@@ -8,6 +8,11 @@
 - [1426. 数元素](https://www.yuque.com/mhusky/czsg5g/za92ef)
 - [1672. 最富有客户的资产总量](https://www.yuque.com/mhusky/czsg5g/ds724k)
 - [832. 翻转图像](https://www.yuque.com/mhusky/czsg5g/fc6mml)
+- [1160. 拼写单词](https://www.yuque.com/mhusky/czsg5g/aatxhz)
+
+### 合并数组，在求解
+
+- [88. 合并两个有序数组](https://www.yuque.com/mhusky/czsg5g/yfxdqa)
 
 ### 修改数组结构，降低多次事件的时间复杂度
 
