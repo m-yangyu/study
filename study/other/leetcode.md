@@ -9,6 +9,11 @@
 - [1672. 最富有客户的资产总量](https://www.yuque.com/mhusky/czsg5g/ds724k)
 - [832. 翻转图像](https://www.yuque.com/mhusky/czsg5g/fc6mml)
 - [1160. 拼写单词](https://www.yuque.com/mhusky/czsg5g/aatxhz)
+- [1266. 访问所有点的最小时间](https://www.yuque.com/mhusky/czsg5g/xsp9ro)
+
+### 数组先扁平，在求解
+
+- [1260. 二维网格迁移](https://www.yuque.com/mhusky/czsg5g/brli38)
 
 ### 合并数组，在求解
 
