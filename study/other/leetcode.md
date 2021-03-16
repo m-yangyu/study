@@ -15,6 +15,10 @@
 
 - [1260. 二维网格迁移](https://www.yuque.com/mhusky/czsg5g/brli38)
 
+### 思路转换求解
+
+- [747. 至少是其他数字两倍的最大数](https://www.yuque.com/mhusky/czsg5g/ofgut9)
+
 ### 合并数组，在求解
 
 - [88. 合并两个有序数组](https://www.yuque.com/mhusky/czsg5g/yfxdqa)
