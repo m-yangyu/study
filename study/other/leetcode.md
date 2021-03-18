@@ -10,6 +10,7 @@
 - [832. 翻转图像](https://www.yuque.com/mhusky/czsg5g/fc6mml)
 - [1160. 拼写单词](https://www.yuque.com/mhusky/czsg5g/aatxhz)
 - [1266. 访问所有点的最小时间](https://www.yuque.com/mhusky/czsg5g/xsp9ro)
+- [1133. 最大唯一数](https://www.yuque.com/mhusky/czsg5g/chuyk4)
 
 ### 数组先扁平，在求解
 
