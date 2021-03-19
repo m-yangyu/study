@@ -12,6 +12,7 @@
 - [1266. 访问所有点的最小时间](https://www.yuque.com/mhusky/czsg5g/xsp9ro)
 - [1133. 最大唯一数](https://www.yuque.com/mhusky/czsg5g/chuyk4)
 - [1539. 第 k 个缺失的正整数](https://www.yuque.com/mhusky/czsg5g/wov1zn)
+- [1539. 第 k 个缺失的正整数](https://www.yuque.com/mhusky/czsg5g/htlbom)
 
 ### 数组先扁平，在求解
 
