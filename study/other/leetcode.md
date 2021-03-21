@@ -58,3 +58,8 @@
 
 ### 将重复求和的动作转换为和的相减
 - [303.区域和检索 - 数组不可变](https://www.yuque.com/mhusky/czsg5g/rdwnhd)
+
+## 链表
+
+### 暴力求解
+- [面试题 02.02. 返回倒数第 k 个节点](https://www.yuque.com/mhusky/czsg5g/vk8urn)
