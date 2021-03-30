@@ -73,3 +73,4 @@
 ### 双指针
 - [876. 链表的中间结点](https://www.yuque.com/mhusky/czsg5g/uy6wb6)
 - [203. 移除链表元素](https://www.yuque.com/mhusky/czsg5g/zwm3g3)
+- [1474. 删除链表 M 个节点之后的 N 个节点](https://www.yuque.com/mhusky/czsg5g/wdr9wa)
