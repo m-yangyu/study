@@ -70,6 +70,7 @@
 
 ### 递归
 - [234. 回文链表](https://www.yuque.com/mhusky/czsg5g/dcogay)
+- [83. 删除排序链表中的重复元素](https://www.yuque.com/mhusky/czsg5g/zp8o1g)
 
 ### 双指针
 - [876. 链表的中间结点](https://www.yuque.com/mhusky/czsg5g/uy6wb6)
