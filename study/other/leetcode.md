@@ -70,6 +70,7 @@
 
 ### 递归
 - [234. 回文链表](https://www.yuque.com/mhusky/czsg5g/dcogay)
+- [83. 删除排序链表中的重复元素](https://www.yuque.com/mhusky/czsg5g/zp8o1g)
 
 ### 双指针
 - [876. 链表的中间结点](https://www.yuque.com/mhusky/czsg5g/uy6wb6)
@@ -77,3 +78,5 @@
 - [剑指 Offer 52. 两个链表的第一个公共节点](https://www.yuque.com/mhusky/czsg5g/nwcn4c)
 - [面试题 02.01. 移除重复节点](https://www.yuque.com/mhusky/czsg5g/kd40yk)
 - [141. 环形链表](https://www.yuque.com/mhusky/czsg5g/wekvul)
+- [1474. 删除链表 M 个节点之后的 N 个节点](https://www.yuque.com/mhusky/czsg5g/wdr9wa)
+- [剑指 Offer 52. 两个链表的第一个公共节点](https://www.yuque.com/mhusky/czsg5g/nwcn4c)
