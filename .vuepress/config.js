@@ -15,7 +15,7 @@ module.exports = {
             },
             {
                 title: '算法',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     ['/study/other/leetcode', '每日一题'],
                 ]
