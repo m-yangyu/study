@@ -94,6 +94,6 @@
 
 ## 栈
 
-## 辅助栈
+### 辅助栈
 
 - [155. 最小栈](https://www.yuque.com/mhusky/czsg5g/fxamu3)
