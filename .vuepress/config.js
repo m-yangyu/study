@@ -15,6 +15,7 @@ module.exports = {
             },
             {
                 title: '算法',
+                sidebarDepth: 2,
                 collapsable: true,
                 children: [
                     ['/study/other/leetcode', '每日一题'],
