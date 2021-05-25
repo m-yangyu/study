@@ -11,6 +11,7 @@ module.exports = {
                 children: [
                     ['/blog/20201026', 'vite好在哪里'],
                     ['/blog/20201018', 'vue3为什么要用proxy替代defineproperty'],
+                    ['/blog/20210525', '为什么说技术是服务于业务的']
                 ]
             },
             {
