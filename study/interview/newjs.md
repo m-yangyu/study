@@ -28,4 +28,49 @@
 
 闭包的变量存放的位置其实是跟当前函数被定义的时候是相同的，就是在函数被编译的时候，他应该还存在一个特殊的变量环境，就是闭包环境， 那么这个环境是跟随着函数存放的位置一起绑定的， 当执行上下文被推出的时候，闭包环境不会被释放，而当前函数的执行上下文会被释放，直到存在闭包的函数的变量被释放的时候，这个闭包才会被释放
 
-而闭包的存在他依旧是一个栈，因为内部的变量可能是
+闭包环境依旧是一个栈
+
+## this/call/bind/apply
+
+this是js中的一个比较难以理解的点，一般情况下有几种情况
+
+1. function的this指向调用的对象，如果在window下调用那就是window，在object下调用就是object
+2. 箭头函数的this指向在编译时的当前执行上下文的this
+
+call/bind/apply 都是可以直接修改当前方法的this指向
+
+例如：
+
+```js
+function test() {
+    cosnole.log(this.a);
+}
+
+const b = {
+    a: 1,
+    test,
+}
+
+const c = {
+    a: 2,
+    test,
+}
+
+b.a(); // 1
+c.a(); // 2
+```
+
+### 手动实现call方法
+
+```js
+function myCall(context = window, ...args) {
+    if (this === Function.prototype) {
+        return undefined; // 用于防止 Function.prototype.myCall() 直接调用
+      }
+      const fn = Symbol();
+      context[fn] = this;
+      const result = context[fn](...args);
+      delete context[fn];
+      return result;
+}
+```
