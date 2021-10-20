@@ -287,3 +287,96 @@ Son.prototype.sayAge = function(){
 
 
 ## promise
+
+promise是js的异步回调的一个处理方案， 当然后面的async / await， 跟generator更加的舒适
+
+### 手写promise
+
+```js
+// 首先知道promise是有三种状态的， pending，fulfilled和rejected
+// 其次需要了解promise的then跟catch是可以链式调用的
+
+const PROMISE_STATE = {
+    PENDING: 'pengding',
+    FULFILLED: 'fulfilled',
+    REJECTED: 'rejected'
+}
+
+class Promise {
+    constructor(executor) {
+        this.state = PROMISE_STATE.PENDING;
+        this.successCallback = [];
+        this.failCallback = [];
+        this.value = void 0;
+
+        try {
+            excutor(this.resolve, this.reject);
+        } catch(e) {
+            this.reject(e);
+        }
+        // 支持链式调用
+        return this;
+    }
+
+    // 如果resolve的值是一个Promise， 那么需要取出Promise的值
+    handlePromise(value) {
+        if (value instanceof Promise) {
+            return value.value;
+        }
+        return value;
+    }
+
+    resolve(value) {
+        // 放入微任务队列
+        queueMicrotask(() => {
+            if (this.state === PROMISE_STATE.PENDING) {
+                this.state = PROMISE_STATE.FULFILLED;
+                this.value = value;
+                const callback = this.successCallback.pop();
+                try {
+                    value = callback(this.handlePromise(value))
+                    if (this.successCallback.length) {
+                        // 由于两个then之间是可以被插入微任务的，所以肯定是当前微任务生成下一个微任务
+                        this.resolve(value);
+                    }
+                } catch(e) {
+                    this.reject(e);
+                }
+            }
+        })
+    }
+
+    reject(e) {
+        queueMicrotask(() => {
+            if (this.failCallback.length) {
+                this.state = PROMISE_STATE.REJECTED;
+                // 连续两个catch是防止在catch里面报错
+                try {
+                    const callback = this.failCallback.pop();
+                    callback(e);
+                } catch(e) {
+                    this.reject(e);
+                }
+            }
+        })
+    }
+
+    then(callback) {
+        this.successCallback.push(callback);
+        return this;
+    }
+
+    catch(callback) {
+        this.failCallback.push(callback);
+        return this;
+    }
+
+    static all() {
+        // 懒得写了， 就是执行里面的promise，取出所有的值，返回一个promise
+    }
+
+    static race() {
+        // 懒得写了， 就是第一个resolve的promise作为结果直接返回
+    }
+}
+```
