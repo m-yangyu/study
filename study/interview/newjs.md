@@ -176,3 +176,114 @@ function newOperator(ctor){
     return newObj;
 }
 ```
+
+## 原型链
+
+js中的所有方法都存在原型， 而所有的对象都有一个指向原型的字段，不断向上回溯就能就形成一条原型链
+
+Function.prototype => 方法原型
+new Function().__proto__ => Function.prototype
+Function === 方法构造函数（存在于原型之中）
+
+### 原型链的作用
+
+1. 添加统一方法（vue）
+2. 继承
+
+#### 添加统一方法
+
+目前主要的已存在的方案就是`Vue`的方案， `Vue`通过挂载在`prototype`上的方法实现所有组件都能够调用统一的方法的能力
+
+`Vue.prototype.$store => vuex`添加到`Vue`构造函数中的参数，在所有`new Vue`的实例里面都能够被访问，并且`this`还指向当前的`Vue`实例
+
+#### 继承
+
+在js中继承其实就是在将原型指向另一个实例，即：
+
+`Function1.prototype = new Function2();`
+
+这样就能够让， `Function1` 继承 `Function2`
+
+具体的实现：
+
+> 借用构造函数
+
+```js
+function Father () {
+    this.name = 1;
+}
+
+function Son() {
+    Father.call(this)
+}
+```
+
+缺点: 父元素的原型链上的方法或者其他内容无法被继承下来
+
+> 组合继承
+
+```js
+function Father(name){
+    this.name = name;
+    this.colors = ["red","blue","green"];
+}
+Father.prototype.sayName = function(){
+    alert(this.name);
+};
+function Son(name,age){
+    Father.call(this,name);//继承实例属性，第一次调用Father()
+    this.age = age;
+}
+Son.prototype = new Father();//继承父类方法,第二次调用Father()
+Son.prototype.sayAge = function(){
+    alert(this.age);
+}
+```
+
+缺点： 虽然能够继承原型链了， 但是Father的构造函数被执行了两次, 并且在原型链上跟自身都存在了Father的属性
+
+> 寄生组合式继承
+
+```js
+
+function extend(subClass, superClass) {
+  var F = function() {};
+  F.prototype = superClass.prototype;
+  subClass.prototype = new F(); 
+  subClass.prototype.constructor = subClass;
+
+  subClass.superclass = superClass.prototype;
+  if(superClass.prototype.constructor == Object.prototype.constructor) {
+    superClass.prototype.constructor = superClass;
+  }
+}
+
+function Father(name){
+    this.name = name;
+    this.colors = ["red","blue","green"];
+}
+Father.prototype.sayName = function(){
+    alert(this.name);
+};
+function Son(name,age){
+    Father.call(this,name);//继承实例属性，第一次调用Father()
+    this.age = age;
+}
+extend(Son,Father)//继承父类方法,此处并不会第二次调用Father()
+Son.prototype.sayAge = function(){
+    alert(this.age);
+}
+```
+
+#### es6的class继承跟es5的有什么区别
+
+1. class 申明会提升
+2. class 内部使用了严格模式
+3. class 的所有方法（包括实例跟静态）都是不可枚举的
+4. class 的方法都是没有`prototype`的，所以无法使用`new`关键字来实例化
+5. class 必须使用`new`关键字，不然无法创建出实例
+6. class 内部无法重新类名
+7. es6与es5的调用this方式不一样，es5是先实例化子类然后在子类上添加相关的父类的信息，而es6是先实例父类，然后在父类上添加子类的实例信息，这样的差别导致es6的继承可以继承一些内置对象，例如Date，Array
+
+
+## promise
