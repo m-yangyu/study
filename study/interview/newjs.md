@@ -380,3 +380,32 @@ class Promise {
     }
 }
 ```
+
+## 深浅拷贝
+
+浅拷贝指的是，拷贝的对象的地址
+深拷贝指的是，将整个对象全部重新复制一份，相当于在内存里面存入了两个一模一样的对象
+
+### 手写深拷贝
+
+```js
+
+const map = new WeakMap();
+
+var deepCopy = function(obj) {
+    if (map.has(obj)) {
+        return map.get(obj);
+    }
+    if (typeof obj !== 'object') return;
+
+    var target = obj instanceof Array ? [] : {};
+    map.set(obj, target);
+
+    Reflect.ownKeys(obj).forEach((key) => {
+        target[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key];
+    })
+    return target;
+}
+```
+
+上面的做法可能会出现递归爆站的情况， 这时候就直接使用广度优先的方法直接一路循环下来就好了
