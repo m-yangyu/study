@@ -390,6 +390,8 @@ class Promise {
 
 ```js
 
+// 使用JSON的方法也可以进行深拷贝， 但是会遇到循环引用报错，function直接被丢弃的情况
+
 const map = new WeakMap();
 
 var deepCopy = function(obj) {
@@ -409,3 +411,39 @@ var deepCopy = function(obj) {
 ```
 
 上面的做法可能会出现递归爆站的情况， 这时候就直接使用广度优先的方法直接一路循环下来就好了
+
+## 防抖，节流
+
+防抖指的是在多次快速点击下只响应最后一次点击
+节流指的是在多次快速点击下，触发第一次点击，然后知道间隔时间过去才会触发下一次点击
+
+> 防抖
+
+```js
+function debounce(fn, _this = null, time) {
+    let timer = null;
+    return function() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(_this, arguments);
+        }, time)
+    }
+}
+```
+
+> 节流
+
+```js
+function throttle(fn, _this, time) {
+    let timer = null;
+    return function() {
+        if (timer) {
+            return ;
+        }
+        timer = setTimeout(() => {
+            fn.apply(_this, arguments);
+            clearTimeout(timer);
+        }, time)
+    }
+}
+```
