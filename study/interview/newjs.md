@@ -447,3 +447,27 @@ function throttle(fn, _this, time) {
     }
 }
 ```
+
+## event loop
+
+js执行主进程，进入执行栈，如果在运行过程中遇到宏任务或者微任务，就压入对应的任务栈中，等执行栈执行完成，就会先执行微任务，再执行宏任务，如果微任务中继续产生微任务，那么会继续执行微任务，如果是宏任务产生的微任务那么就会被放入下一个任务队列中
+
+一个任务队列包含了
+
+1. 微任务
+2. 宏任务
+3. UI渲染(raf)
+
+node 的event loop有些许不同
+
+1. timer：setTimeout / setInterval的执行
+2. peding callback： 上述未完成的内容进行继续执行
+3. idle, prepare： node内部的循环
+4. poll：执行io操作，如果没有io队列，会先看是否有setImmediate的队列存在，有的话直接进入下一个阶段，没有的话会进入等待，并且等待是否有超时的timer阶段的内容，有的话直接返回去执行timer阶段相关的内容
+5. check：检查是否存在setImmediate的回调，有的话就执行
+6. close callback： 是否存在需要关闭链接的回调， 有的话执行
+
+process.nexttick
+
+是存在于事件队列之外的内容，就是一个执行队列执行之后，会执行nexttick的栈
+
