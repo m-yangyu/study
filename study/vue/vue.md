@@ -103,3 +103,8 @@ class MyComponent extends Vue {
 }
 
 ```
+
+
+### 跨端方案
+
+![跨端方案设计](../public/image/design.png);
